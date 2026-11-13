@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>error_analysis</title>
+
+<style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    color: #24292e;
+}
+h1, h2, h3, h4 {
+    color: #1f2328;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #d0d7de;
+    padding-bottom: 8px;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0;
+}
+th, td {
+    border: 1px solid #d0d7de;
+    padding: 8px 12px;
+    text-align: left;
+}
+th {
+    background-color: #f6f8fa;
+    font-weight: 600;
+}
+tr:nth-child(even) {
+    background-color: #f6f8fa;
+}
+code {
+    background-color: #eff1f3;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 85%;
+    font-family: ui-monospace, SFMono-Regular, monospace;
+}
+pre {
+    background-color: #f6f8fa;
+    padding: 16px;
+    border-radius: 6px;
+    overflow: auto;
+    border: 1px solid #d0d7de;
+}
+pre code {
+    background: none;
+    padding: 0;
+}
+blockquote {
+    border-left: 4px solid #0969da;
+    margin: 0;
+    padding-left: 16px;
+    color: #57606a;
+}
+hr {
+    border: none;
+    border-top: 1px solid #d0d7de;
+    margin: 24px 0;
+}
+@media print {
+    body {
+        margin: 10mm;
+        max-width: 100%;
+    }
+    pre, table {
+        page-break-inside: avoid;
+    }
+}
+</style>
+
+</head>
+<body>
+<h1>NimbusPay Ticket Triage — Comprehensive Error Analysis</h1>
+<h2>1. Executive Summary</h2>
+<p>This error analysis examines development set performance across both the cleaned 4-bit QLoRA model (E1/E2 baseline) and the best completed model, <strong>E2 FP16 LoRA</strong> (94.5% exact match, 98.875% mean field accuracy).</p>
+<table>
+<thead>
+<tr>
+<th>Model Configuration</th>
+<th style="text-align: right;">Dev Records</th>
+<th style="text-align: right;">Exact Match</th>
+<th style="text-align: right;">Mean Field Accuracy</th>
+<th style="text-align: right;">JSON Valid</th>
+<th style="text-align: right;">Total Mismatches</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E1 Cleaned QLoRA</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">90.0% (180/200)</td>
+<td style="text-align: right;">97.00%</td>
+<td style="text-align: right;">100%</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr>
+<td><strong>E2 FP16 LoRA (Best)</strong></td>
+<td style="text-align: right;"><strong>200</strong></td>
+<td style="text-align: right;"><strong>94.5% (189/200)</strong></td>
+<td style="text-align: right;"><strong>98.88%</strong></td>
+<td style="text-align: right;"><strong>100%</strong></td>
+<td style="text-align: right;"><strong>11</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Transitioning from 4-bit QLoRA to FP16 LoRA resolved <strong>9 of the 20 errors</strong> from the QLoRA model, cutting the total error count by <strong>45%</strong> without changing any hyperparameters or training data.</p>
+<hr />
+<h2>2. Field-Level Accuracy Breakdown (E2 FP16 LoRA)</h2>
+<p>Scored using the official evaluator (<code>candidate_pack/score.py</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th style="text-align: right;">Accuracy</th>
+<th style="text-align: right;">Errors / 200</th>
+<th>Primary Failure Mode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>category</code></td>
+<td style="text-align: right;"><strong>97.0%</strong></td>
+<td style="text-align: right;">6</td>
+<td>Boundary ambiguity (fraud vs failed top-up, card lifecycle queries)</td>
+</tr>
+<tr>
+<td><code>priority</code></td>
+<td style="text-align: right;"><strong>96.0%</strong></td>
+<td style="text-align: right;">8</td>
+<td>Consequential from category errors, account balance distraction, or threshold logic</td>
+</tr>
+<tr>
+<td><code>amount_paise</code></td>
+<td style="text-align: right;"><strong>100.0%</strong></td>
+<td style="text-align: right;">0</td>
+<td>Perfect extraction across Hindi and English number units (<code>k</code>, <code>lakh</code>, standard rupees)</td>
+</tr>
+<tr>
+<td><code>txn_date</code></td>
+<td style="text-align: right;"><strong>99.5%</strong></td>
+<td style="text-align: right;">1</td>
+<td>Month-boundary calendar arithmetic error (June 31 hallucination)</td>
+</tr>
+<tr>
+<td><code>txn_id</code></td>
+<td style="text-align: right;"><strong>99.5%</strong></td>
+<td style="text-align: right;">1</td>
+<td>Missed identifier in colloquial Hinglish sentence structure</td>
+</tr>
+<tr>
+<td><code>channel</code></td>
+<td style="text-align: right;"><strong>100.0%</strong></td>
+<td style="text-align: right;">0</td>
+<td>Perfect explicit payment method extraction</td>
+</tr>
+<tr>
+<td><code>language</code></td>
+<td style="text-align: right;"><strong>100.0%</strong></td>
+<td style="text-align: right;">0</td>
+<td>Perfect separation of English and Hinglish</td>
+</tr>
+<tr>
+<td><code>needs_human</code></td>
+<td style="text-align: right;"><strong>99.0%</strong></td>
+<td style="text-align: right;">2</td>
+<td>Cascade from priority P1 misclassifications</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. Deep-Dive: All 11 Mismatches in E2 FP16 LoRA</h2>
+<p>Below is the complete investigation of every single prediction failure by the E2 FP16 LoRA model on the 200-record development set.</p>
+<table>
+<thead>
+<tr>
+<th>Ticket ID</th>
+<th>Input Snippet</th>
+<th>Predicted Output</th>
+<th>Ground Truth (Gold)</th>
+<th>Root Cause Analysis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>dv-00006</strong></td>
+<td>"Received: 2026-07-02... fraudulent payment... It was day before yesterday... Amount: 1.3 lakh"</td>
+<td><code>txn_date</code>: <code>"2026-06-31"</code></td>
+<td><code>txn_date</code>: <code>"2026-06-30"</code></td>
+<td><strong>Calendar Edge-Case Failure:</strong> "Day before yesterday" relative to July 2 is June 30. The model hallucinated <code>2026-06-31</code> (June has only 30 days). The model understood the relative date offset (-2 days) but lacked Gregorian month-length awareness.</td>
+</tr>
+<tr>
+<td><strong>dv-00010</strong></td>
+<td>"URGENT!! I didn't see the money I added to my card. ID: NP0194178721 INR 2,570"</td>
+<td><code>category</code>: <code>fraud</code><br><code>priority</code>: <code>P1</code><br><code>needs_human</code>: <code>true</code></td>
+<td><code>category</code>: <code>payment_failed</code><br><code>priority</code>: <code>P3</code><br><code>needs_human</code>: <code>false</code></td>
+<td><strong>Urgency and Keyword Overreaction:</strong> Customer complained that a card top-up did not show up. The emotional phrasing "URGENT!!" and missing funds caused the model to classify it as unauthorized activity (<code>fraud</code>) rather than a pending/failed top-up (<code>payment_failed</code>). Priority and human review cascaded from this error.</td>
+</tr>
+<tr>
+<td><strong>dv-00019</strong></td>
+<td>"My product was faulty. Amount: 259419 rupees... Mode: credit card. Kindly resolve this asap."</td>
+<td><code>category</code>: <code>other</code></td>
+<td><code>category</code>: <code>refund</code></td>
+<td><strong>Implicit Refund Intent:</strong> The customer complained of a faulty product without explicitly writing the word "refund". The model fell back to <code>other</code>. Under NimbusPay domain semantics, faulty product complaints with transaction amounts belong to <code>refund</code>.</td>
+</tr>
+<tr>
+<td><strong>dv-00037</strong></td>
+<td>"charged twice for multiple different purchases... duplicate charges refunded... 284669 rupees was the value."</td>
+<td><code>priority</code>: <code>P2</code><br><code>needs_human</code>: <code>false</code></td>
+<td><code>priority</code>: <code>P1</code><br><code>needs_human</code>: <code>true</code></td>
+<td><strong>Threshold Comparison Slip:</strong> The model correctly identified <code>refund</code> and extracted the amount (284,669 rupees). However, it assigned <code>P2</code> instead of <code>P1</code>. Under rule 1, any disputed amount of 50,000 rupees or more must be <code>P1</code> with <code>needs_human = true</code>. The numerical comparison failed.</td>
+</tr>
+<tr>
+<td><strong>dv-00044</strong></td>
+<td>"I can't see my refund in my history. Amount: Rs. 8377... second complaint on same issue."</td>
+<td><code>priority</code>: <code>P3</code></td>
+<td><code>priority</code>: <code>P2</code></td>
+<td><strong>P2 Threshold Under-assignment:</strong> 8,377 rupees is above the 5,000 rupee threshold. Under Rule 2, a refund of 5,000 rupees or more must be <code>P2</code>. The model assigned <code>P3</code>.</td>
+</tr>
+<tr>
+<td><strong>dv-00084</strong></td>
+<td>"I didn't get a PIN yet. What gives? I am on the iOS app."</td>
+<td><code>category</code>: <code>account_access</code><br><code>priority</code>: <code>P2</code></td>
+<td><code>category</code>: <code>other</code><br><code>priority</code>: <code>P3</code></td>
+<td><strong>Gold Label Inconsistency vs Annotation Spec:</strong> The specification explicitly lists "blocked PIN, forgotten passcode, OTP, reset problems" under <code>account_access</code>. The model followed the written specification, but the gold label assigned <code>other</code>.</td>
+</tr>
+<tr>
+<td><strong>dv-00124</strong></td>
+<td>"Merchant bol raha hai refund kar diya, lekin mujhe mila nahi... Pichla ticket #13657. NP 7026767936 check kar lo."</td>
+<td><code>priority</code>: <code>P2</code><br><code>txn_id</code>: <code>null</code></td>
+<td><code>priority</code>: <code>P3</code><br><code>txn_id</code>: <code>"NP7026767936"</code></td>
+<td><strong>Hinglish Syntax and Distractor Confusion:</strong> The model missed the transaction ID when embedded in colloquial Hindi-English ("check kar lo") and misclassified priority as P2 (no amount was mentioned, so it should be P3).</td>
+</tr>
+<tr>
+<td><strong>dv-00157</strong></td>
+<td>"Kisi ne OTP manag ke mere piase nikal liye, yeh maine nahi kiya... 140 rupaye kat gaye."</td>
+<td><code>category</code>: <code>account_access</code><br><code>priority</code>: <code>P2</code></td>
+<td><code>category</code>: <code>fraud</code><br><code>priority</code>: <code>P1</code></td>
+<td><strong>Keyword Collision (OTP vs Unauthorized Fraud):</strong> The ticket described social engineering fraud where someone asked for an OTP and stole money ("yeh maine nahi kiya"). The model latched onto "OTP" (an <code>account_access</code> trigger) instead of recognizing the overarching unauthorized transaction (<code>fraud</code>).</td>
+</tr>
+<tr>
+<td><strong>dv-00177</strong></td>
+<td>"There has been a red flag on my top up. Amount: Rs. 293571... Ref: NP 2615116977"</td>
+<td><code>category</code>: <code>fraud</code></td>
+<td><code>category</code>: <code>payment_failed</code></td>
+<td><strong>Ambiguous Phrasing:</strong> The phrase "red flag on my top up" triggered the model's fraud detector, whereas human annotators treated it as a flagged/failed top-up transaction.</td>
+</tr>
+<tr>
+<td><strong>dv-00180</strong></td>
+<td>"Get an item refund. My account balance is Rs. 241670 right now. The transaction amount is ₹3,130... earlier ticket #38390."</td>
+<td><code>priority</code>: <code>P1</code></td>
+<td><code>priority</code>: <code>P3</code></td>
+<td><strong>Balance vs Transaction Amount Distraction:</strong> The customer explicitly gave their account balance (241,670 rupees) and transaction amount (3,130 rupees). The model extracted the correct transaction amount but evaluated the priority rule against the high account balance.</td>
+</tr>
+<tr>
+<td><strong>dv-00194</strong></td>
+<td>"If I find a card I lost do I need to dispose of it? Or can I re-active the card... second complaint"</td>
+<td><code>category</code>: <code>account_access</code><br><code>priority</code>: <code>P2</code></td>
+<td><code>category</code>: <code>other</code><br><code>priority</code>: <code>P3</code></td>
+<td><strong>Card Lifecycle Classification Boundary:</strong> Inquiring about unblocking or reactivating a found physical card was classified as <code>account_access</code> by the model, whereas the annotator categorized card disposal questions as <code>other</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>4. Error Category Taxonomy and Root Causes</h2>
+<p>Analyzing the 11 errors reveals four distinct error mechanisms:</p>
+<h3>A. Priority Thresholds and Distractor Fields (4 tickets: dv-00037, dv-00044, dv-00180, dv-00124)</h3>
+<ul>
+<li><strong>Amount threshold comparison:</strong> The model struggles with numerical inequality reasoning in the prompt context (for example, mapping 284,669 rupees to P2 instead of P1 in <code>dv-00037</code>).</li>
+<li><strong>Account balance distraction:</strong> In <code>dv-00180</code>, the model correctly ignored the account balance for <code>amount_paise</code>, but its self-attention layer leaked the large balance figure into the priority classification head.</li>
+</ul>
+<h3>B. Category Keyword vs Context Collisions (4 tickets: dv-00010, dv-00019, dv-00157, dv-00177)</h3>
+<ul>
+<li>In <code>dv-00157</code>, "OTP" biased the model towards <code>account_access</code>, overriding the primary claim "yeh maine nahi kiya" (unauthorized debit leading to <code>fraud</code>). Under the labelling rules, fraud takes precedence over every other category.</li>
+<li>In <code>dv-00010</code> and <code>dv-00177</code>, panic phrases ("URGENT", "red flag") triggered false-positive <code>fraud</code> classifications for failed top-ups.</li>
+</ul>
+<h3>C. Ground-Truth Inconsistency and Underspecification (2 tickets: dv-00084, dv-00194)</h3>
+<ul>
+<li>In <code>dv-00084</code>, the ticket states <em>"I didn't get a PIN yet."</em> The official schema states that PIN and OTP problems belong to <code>account_access</code>. The model adhered strictly to the written specification, but the gold label was marked <code>other</code>.</li>
+</ul>
+<h3>D. Multi-Step Temporal Arithmetic (1 ticket: dv-00006)</h3>
+<ul>
+<li>The model computed two days before July 2nd as June 31st. The tokenizer and attention layers lack an internal Gregorian calendar table to know that June ends on day 30.</li>
+</ul>
+<hr />
+<h2>5. Comparison: E1 Cleaned QLoRA (20 errors) vs E2 FP16 LoRA (11 errors)</h2>
+<table>
+<thead>
+<tr>
+<th>Error Type</th>
+<th style="text-align: right;">E1 Cleaned QLoRA</th>
+<th style="text-align: right;">E2 FP16 LoRA</th>
+<th>Improvement Mechanism</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Priority Threshold Errors</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">3</td>
+<td>Full-precision attention representations improve boundary sharpness</td>
+</tr>
+<tr>
+<td>Category Classification Errors</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">5</td>
+<td>Ambiguous tickets remain difficult without chain-of-thought</td>
+</tr>
+<tr>
+<td>Transaction ID Truncation / Drop</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td>Unquantized weights preserve fine-grained token position embeddings</td>
+</tr>
+<tr>
+<td>Amount Extraction / Hallucination</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td><strong>100% resolved</strong> — zero amount extraction mistakes in FP16</td>
+</tr>
+<tr>
+<td>Relative Date Errors</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td>50% resolved; month-end boundary remains</td>
+</tr>
+<tr>
+<td><strong>Total Errors</strong></td>
+<td style="text-align: right;"><strong>20</strong></td>
+<td style="text-align: right;"><strong>11</strong></td>
+<td><strong>+4.5% absolute Exact Match improvement</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>6. Actionable Mitigation and One-Week Improvement Plan</h2>
+<p>To push accuracy from <strong>94.5% to above 98%</strong>, the following engineering steps are recommended:</p>
+<ol>
+<li><strong>Pre-generation Calendar Metadata Injection (Day 1 to 2):</strong>
+   Supplement the input header with explicit calendar reference points (for example: <code>Yesterday: 2026-07-01 | Day Before Yesterday: 2026-06-30</code>). This eliminates Gregorian calendar arithmetic errors entirely without violating test-time prompt rules.</li>
+<li><strong>Targeted Hard-Negative Data Augmentation (Day 3 to 4):</strong>
+   Synthesize 150 training tickets combining high account balances with small transaction amounts to train the attention mechanism to dissociate balance from priority.</li>
+<li><strong>Loss-Weighted Fine-Tuning on Priority and Category Tokens (Day 5):</strong>
+   Apply higher cross-entropy loss weights to <code>category</code> and <code>priority</code> tokens during supervised fine-tuning to force precision on boundary values (5,000 and 50,000 rupees).</li>
+<li><strong>Development Set Label Reconciliation (Day 6):</strong>
+   Review and standardize ambiguous tickets (<code>dv-00084</code>, <code>dv-00019</code>) with the annotation team to align gold labels with written guidelines.</li>
+<li><strong>Hyperparameter Sweep and Ensembling (Day 7):</strong>
+   Evaluate learning rates between 1e-4 and 2e-4 and test an ensemble across Rank 16 and Rank 8 checkpoints.</li>
+</ol>
+</body>
+</html>

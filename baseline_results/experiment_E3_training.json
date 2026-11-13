@@ -1,0 +1,10 @@
+{
+  "experiment": "E3 - Rank 8 FP16 LoRA",
+  "rank": 8,
+  "trainable_parameters": 8716288,
+  "training_minutes": 18.56,
+  "peak_training_memory_gb": 8.11,
+  "epochs": 3,
+  "final_eval_loss": 0.00844756979495287,
+  "final_eval_token_accuracy": 0.9986501985788345
+}

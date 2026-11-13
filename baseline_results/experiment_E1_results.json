@@ -1,0 +1,28 @@
+{
+  "experiment": "E1 - Raw vs Cleaned Training Data",
+  "raw": {
+    "training_minutes": 28.82,
+    "peak_training_memory_gb": 6.18,
+    "inference_minutes": 9.36,
+    "peak_inference_memory_gb": 1.48,
+    "json_validity": 1.0,
+    "exact_match": 0.56,
+    "mean_field_accuracy": 0.925625,
+    "field_accuracy": {
+      "category": 0.955,
+      "priority": 0.615,
+      "amount_paise": 1.0,
+      "txn_date": 0.985,
+      "txn_id": 1.0,
+      "channel": 0.995,
+      "language": 1.0,
+      "needs_human": 0.855
+    }
+  },
+  "cleaned": {
+    "training_minutes": 24.98,
+    "peak_training_memory_gb": null,
+    "exact_match": 0.9,
+    "mean_field_accuracy": 0.97
+  }
+}

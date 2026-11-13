@@ -1,0 +1,1378 @@
+id,problems,ticket,expected_priority,actual_priority,expected_human,actual_human
+tr-00013,"Priority: expected P3, got P1; needs_human: expected False, got True","Received: 2026-08-22 (Sat)
+Source: email
+
+Subject: Issue with my account
+
+Hi,
+KYC mein address update karna hai. Android app use kar raha hoon. Bank ref 782509120860 hai. Pehle bhi complaint kar chuka hoon.
+
+Regards,
+Meera Joshi",P3,P1,False,True
+tr-00018,"Priority: expected P3, got P1","Received: 2026-08-01 (Sat)
+Source: email
+
+Subject: Issue with my account
+
+Dear NimbusPay support,
+Referral bonus was not received after my friend signed up. Mode: UPI. My phone is a OnePlus Nord. The transaction amount is Rs. 250. Thanks.
+
+Regards,
+Imran Khan",P3,P1,False,False
+tr-00023,"Priority: expected P3, got P1","Received: 2026-09-15 (Tue)
+Source: app-chat
+
+URGENT!! How can you assist on verifying my identity? I am on the iOS app. Please look into it.",P3,P1,False,False
+tr-00031,"needs_human: expected False, got True","Received: 2026-08-11 (Tue)
+Source: app-chat
+
+Return accept ho gaya par refund nahi aaya abhi tak. App version 6.8.14 hai. Transaction date 05-08-26 hai. Teesri baar bol raha hoon. Amount ₹44,348 tha. Please help karo.",P2,P2,False,True
+tr-00040,"needs_human: expected True, got False","Received: 2026-06-08 (Mon)
+Source: app-chat
+
+My scratch card reward has not been added. My earlier ticket number is #78055. 331 rupees is the amount. Thanks.",P3,P3,True,False
+tr-00042,"needs_human: expected False, got True","Received: 2026-08-17 (Mon)
+Source: email
+
+Subject: Need support
+
+Dear NimbusPay support,
+Where are the virtual cards? My phone is a iPhone 13. I have contacted support about this before. Please help.
+
+Regards,
+Vikram Singh",P3,P3,False,True
+tr-00044,"needs_human: expected True, got False","Received: 2026-06-28 (Sun)
+Source: app-chat
+
+URGENT!! I'm locked out of my account as I can't remember my code, what do I do now? My earlier ticket number is #51075. Please help.",P2,P2,True,False
+tr-00045,"Priority: expected P1, got P3","Received: 2026-06-01 (Mon)
+Source: email
+
+Subject: Help needed
+
+
+I AM MISSING CASH FROM MY BANK ACCOUNT ACCORDING TO MY APP. The amount was INR 11,594. I am on the iOS app. Waiting for your reply.
+
+Regards,
+Fatima Sheikh",P1,P3,True,True
+tr-00047,"needs_human: expected False, got True","Received: 2026-07-02 (Thu)
+Source: ivr-transcript
+
+[IVR transcript] URGENT!! I cannot verify my identity. I am using app version 6.3.4. This is my second complaint on the same issue. Kindly resolve this asap.",P3,P3,False,True
+tr-00050,"needs_human: expected False, got True","Received: 2026-07-03 (Fri)
+Source: app-chat
+
+Sir, Srcatch card ka reawrd add nahi hua. Bank ref 325733031587 hai. Teesri baar bol raha hoon. Dhanyavaad.",P3,P3,False,True
+tr-00055,"needs_human: expected False, got True","Received: 2026-07-29 (Wed)
+Source: app-chat
+
+Hey, what do i do if my verification failed. This is my second complaint on the same issue. Please help.",P3,P3,False,True
+tr-00059,"Priority: expected P3, got P1","Received: 2026-08-20 (Thu)
+Source: twitter
+
+@NimbusPayCare A refund for a recent return has not arrived on my card. The amount was 3.7k. App version is 5.5.20. This happened 5 days ago.",P3,P1,False,False
+tr-00073,"Priority: expected P3, got P1; needs_human: expected False, got True","Received: 2026-07-15 (Wed)
+Source: email
+
+Subject: Problem with NimbusPay
+
+URGENT!!
+I'm sure I have enough money so why didn't the store accept my card? The txn id is NP 4271342441. The transaction amount is Rs 1,68,787.25. Waiting for your reply.
+
+Regards,
+Sneha Iyer",P3,P1,False,True
+tr-00083,"needs_human: expected False, got True","Received: 2026-07-02 (Thu)
+Source: email
+
+Subject: Problem with NimbusPay
+
+Good morning,
+I put the wrong pin too many times and now it is blocked. Can you help me unblock it? I have contacted support about this before. Waiting for your reply.
+
+Regards,
+Meera Joshi",P2,P2,False,True
+tr-00084,"needs_human: expected False, got True","Received: 2026-07-02 (Thu)
+Source: email
+
+Subject: Problem with NimbusPay
+
+Dear NimbusPay support,
+Why can't I topup my account? I have contacted support about this before. You can check NP4211303738. This happened on Jun 26. Total Rs. 214. I am on the iOS app. It was a netbanking transaction. Please look into it.
+
+Regards,
+Meera Joshi",P3,P3,False,True
+tr-00096,"needs_human: expected False, got True","Received: 2026-08-19 (Wed)
+Source: email
+
+Subject: Help needed
+
+Hey,
+I think I was charged double for something I bought - how long should I wait before reporting this? I have already written 4 times about this. ID: np3226169042 The amount was ₹29,674. Please look into it.
+
+Regards,
+Ananya Bose",P2,P2,False,True
+tr-00102,"needs_human: expected False, got True","Received: 2026-08-06 (Thu)
+Source: twitter
+
+@NimbusPayCare Maine merchant ko pay kiya, failed dikha raha hai par amount debit ho gaya. Reference np 79511 25821 hai. Amount Rs. 3969 tha. 6 Aug ki transaction hai. Pehle bhi complaint kar chuka hoon.",P3,P3,False,True
+tr-00107,"needs_human: expected False, got True","Received: 2026-08-09 (Sun)
+Source: email
+
+Subject: Complaint
+
+
+Mera payment fail ho gaya lekin paise account se kat gaye. Teesri baar bol raha hoon. Txn id NP 3229688719. Yeh 24/07/2026 ko hua. Card se hua tha. Total Rs 270.25 ka tha. App version 4.2.7 hai. Reply ka wait kar raha hoon.
+
+Regards,
+Arjun Das",P3,P3,False,True
+tr-00115,"needs_human: expected False, got True","Received: 2026-07-05 (Sun)
+Source: email
+
+Subject: Need support
+
+Hi,
+There's a duplicate charge on my account? This happened on 19-06-26. My account balance is ₹24,930 right now. I have already written 4 times about this. It was a netbanking transaction. The amount was ₹4,953. App version is 4.1.11. Thanks.
+
+Regards,
+Rohan Gupta",P3,P3,False,True
+tr-00116,"needs_human: expected True, got False","Received: 2026-06-09 (Tue)
+Source: app-chat
+
+Why was I charged multiple times for the same thing? The txn id is np7793889428. 11.7k was the value. FYI my daily limit is 1.9 lakhs. Kindly resolve this asap.",P2,P2,True,False
+tr-00129,"Priority: expected P2, got P3","Received: 2026-09-07 (Mon)
+Source: email
+
+Subject: Issue with my account
+
+Sir,
+Recharge nahi hua lekin paise kat gaye hain. Mera phone Samsung M34 hai. Amount ₹46,191 tha. Yeh 1 Sep ko hua. Card se hua tha. Dhanyavaad.
+
+Regards,
+Pooja Nair",P2,P3,False,False
+tr-00134,"needs_human: expected True, got False","Received: 2026-08-24 (Mon)
+Source: ivr-transcript
+
+[IVR transcript] Hey, I've tried using my card multiple times and it keeps getting declined. Amount: Rs. 1971 Date of transaction: 04-08-26. My phone is a Redmi Note 12. Ref: NP 9642938992",P3,P3,True,False
+tr-00140,"needs_human: expected True, got False","Received: 2026-06-17 (Wed)
+Source: app-chat
+
+Hello, I don't know my password anymore. I am using app version 5.9.5. My earlier ticket number is #80678. Thanks.",P2,P2,True,False
+tr-00146,"Priority: expected P3, got P1","Received: 2026-08-07 (Fri)
+Source: twitter
+
+@NimbusPayCare My scratch card reward has not been added. Using the Android app. Date of transaction: Aug 6.",P3,P1,False,False
+tr-00154,"Priority: expected P2, got P3","Received: 2026-08-02 (Sun)
+Source: app-chat
+
+Shopping ka payment decline ho gaya lekin bank ne paise kaat liye. 13-07-26 ki transaction hai. Rakam 47.5k hai. Jaldi solve karo please.",P2,P3,False,False
+tr-00158,"needs_human: expected True, got False","Received: 2026-06-01 (Mon)
+Source: twitter
+
+@NimbusPayCare I tried to pay with my card and it didn't work. ID: np 70933 40818 33489 rupees is the amount. It took place 3 days ago. My earlier ticket number is #84458.",P2,P2,True,False
+tr-00173,"needs_human: expected True, got False","Received: 2026-07-08 (Wed)
+Source: twitter
+
+@NimbusPayCare Why won't my top up work. Transaction ID NP4841192788. Dated 28-06-26. My earlier ticket number is #74088. The transaction amount is 4001 rupees.",P3,P3,True,False
+tr-00184,"Priority: expected P1, got P3","Received: 2026-08-17 (Mon)
+Source: app-chat
+
+Hey, The app doesn't know it's me. My lawyer will send a legal notice. My phone is a Redmi Note 12. Please help.",P1,P3,True,True
+tr-00185,"needs_human: expected False, got True","Received: 2026-09-19 (Sat)
+Source: email
+
+Subject: Complaint
+
+
+I'm expecting a refund but it's no where to be seen. Total INR 6,067. It took place on 9 Sep. This is my second complaint on the same issue. Waiting for your reply.
+
+Regards,
+Imran Khan",P2,P2,False,True
+tr-00187,"Priority: expected P3, got P1; needs_human: expected False, got True","Received: 2026-08-04 (Tue)
+Source: email
+
+Subject: Problem with NimbusPay
+
+Hello ji,
+Paise bheje the dost ko, usko mile nahi aur mere account se kat gaye. Txn id NP1220851898. 3rd August 2026 ki transaction hai. UPI se hua tha. 2.2 lakh ka transaction tha. Jaldi solve karo please.
+
+Regards,
+Rahul Verma",P3,P1,False,True
+tr-00201,"needs_human: expected False, got True","Received: 2026-07-27 (Mon)
+Source: app-chat
+
+Dear NimbusPay support, my card was refused, why? 35.9k is the amount. App version is 6.9.1. I have already written 4 times about this. You can check NP2755186091.",P2,P2,False,True
+tr-00212,"Priority: expected P1, got P3","Received: 2026-06-15 (Mon)
+Source: app-chat
+
+Good morning, My card payment was not successful. My phone is a Redmi Note 12. I will complain to the RBI ombudsman. The txn id is np 53927 30554. It is 1.1 lakhs in total. It took place on 9 Jun. Kindly resolve this asap.",P1,P3,True,True
+tr-00220,"Priority: expected P2, got P3","Received: 2026-08-11 (Tue)
+Source: app-chat
+
+Hey, I have a duplicate payment showing. This happened on 08-08-26. It was from the NimbusPay wallet. Transaction reference NP 2759013242. The transaction amount is Rs. 19389. App version is 7.3.18. Please look into it.",P2,P3,False,False
+tr-00225,"Priority: expected P3, got P1","Received: 2026-08-13 (Thu)
+Source: app-chat
+
+Bhai, Referral bonus nahi aaya, dost ne sign up kar liya hai. App version 5.8.9 hai. Reply ka wait kar raha hoon.",P3,P1,False,False
+tr-00231,"needs_human: expected False, got True","Received: 2026-06-14 (Sun)
+Source: ivr-transcript
+
+[IVR transcript] Hi team, I got a transfer fail message, but no explanation of why-- what happened? This is my second complaint on the same issue. I am on the iOS app. Dated 05/06/2026. It was for INR 36,154. You can check np3312688309.",P2,P2,False,True
+tr-00238,"needs_human: expected False, got True","Received: 2026-09-14 (Mon)
+Source: app-chat
+
+Hello ji, KYC reject ho gaya, photo unclear bol rahe hain. Bank ref 690324576178 hai. Pehle bhi complaint kar chuka hoon.",P3,P3,False,True
+tr-00243,"needs_human: expected False, got True","Received: 2026-07-23 (Thu)
+Source: email
+
+Subject: Issue with my account
+
+Good morning,
+I requested a refund and it is missing. This is my second complaint on the same issue. You can check np3110864219. It was day before yesterday. Kindly resolve this asap.
+
+Regards,
+Vikram Singh",P3,P3,False,True
+tr-00244,"needs_human: expected False, got True","Received: 2026-08-03 (Mon)
+Source: ivr-transcript
+
+[IVR transcript] Dear NimbusPay support, I need to reset my passcode. Where do I go to do that? I have already written 4 times about this. Using the Android app. Kindly resolve this asap.",P2,P2,False,True
+tr-00246,"needs_human: expected False, got True","Received: 2026-06-01 (Mon)
+Source: ivr-transcript
+
+[IVR transcript] Namaste, PAN veriifcation fail ho raha hai KYC mein, detalis sahi hain. Teesri baar bol raha hoon. Android app use kar raha hoon. Jaldi solve karo please.",P3,P3,False,True
+tr-00251,"needs_human: expected False, got True","Received: 2026-06-27 (Sat)
+Source: ivr-transcript
+
+[IVR transcript]  Where can I go to get my PIN unblocked? I have contacted support about this before. Thanks.",P2,P2,False,True
+tr-00252,"needs_human: expected False, got True","Received: 2026-06-11 (Thu)
+Source: ivr-transcript
+
+[IVR transcript] Hello, My top-up never worked. App version is 5.6.20. This is my second complaint on the same issue. It took place on 27/05/2026. The txn id is np4667903365. 4963 rupees was the value. Kindly resolve this asap.",P3,P3,False,True
+tr-00285,"needs_human: expected True, got False","Received: 2026-07-22 (Wed)
+Source: ivr-transcript
+
+[IVR transcript] Dear NimbusPay support, Why isn't my refund showing up in my statement? My earlier ticket number is #52069. It is INR 18,462 in total. I am using app version 7.4.3.",P2,P2,True,False
+tr-00294,"Priority: expected P2, got P3","Received: 2026-07-29 (Wed)
+Source: email
+
+Subject: Need support
+
+Dear NimbusPay support,
+Was there a problem with topping up? Ref: NP 2499131353 It took place yesterday. I am using app version 7.9.13. INR 46,530 is the amount. Kindly resolve this asap.
+
+Regards,
+Kavya Reddy",P2,P3,False,False
+tr-00299,"needs_human: expected True, got False","Received: 2026-08-27 (Thu)
+Source: email
+
+Subject: Help needed
+
+Hi team,
+Would you please unblock my pin? I don't know why, but it's blocked. My earlier ticket number is #56120.
+
+Regards,
+Ananya Bose",P2,P2,True,False
+tr-00305,"needs_human: expected True, got False","Received: 2026-08-20 (Thu)
+Source: app-chat
+
+Hey, I do not remember the code, what should I do? My earlier ticket number is #20374. Please help.",P2,P2,True,False
+tr-00306,"Priority: expected P3, got P1","Received: 2026-08-08 (Sat)
+Source: app-chat
+
+Hello, What all am I required to show for the identity check? Waiting for your reply.",P3,P1,False,False
+tr-00309,"Priority: expected P3, got P1","Received: 2026-06-20 (Sat)
+Source: twitter
+
+@NimbusPayCare Mobile number change karna hai account mein. Android app use kar raha hoon.",P3,P1,False,False
+tr-00311,"needs_human: expected True, got False","Received: 2026-08-17 (Mon)
+Source: ivr-transcript
+
+[IVR transcript] Good morning, The pormo code is not applying at checkout. My earlier ticket number is #28834. Please look into it.",P3,P3,True,False
+tr-00312,"Priority: expected P3, got P1","Received: 2026-08-21 (Fri)
+Source: email
+
+Subject: Complaint
+
+Namaste,
+Referral bonus nahi aaya, dost ne sign up kar liya hai. Jaldi solve karo please.
+
+Regards,
+Imran Khan
+
+> On 11 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #58478. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 20 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #66965. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 13 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #69940. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 30 Jul 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #63135. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 06 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #16291. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 09 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #94509. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 17 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #82996. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 23 Jul 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #98478. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 29 Jul 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #97532. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 03 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #36526. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 02 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #24000. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 28 Jul 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #78889. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.",P3,P1,False,False
+tr-00340,"needs_human: expected True, got False","Received: 2026-08-27 (Thu)
+Source: email
+
+Subject: Help needed
+
+Hi team,
+Would you please unblock my pin? I don't know why, but it's blocked.  My earlier ticket number is #56120.
+
+Regards,
+Ananya Bose Thx",P2,P2,True,False
+tr-00341,"needs_human: expected False, got True","Received: 2026-06-11 (Thu)
+Source: email
+
+Subject: Help needed
+
+Sir,
+Paise bheje the dost ko, usko mile nahi aur mere account se kat gaye. 5 din pehle hi hua yeh. Teesri baar bol raha hoon. Android app use kar raha hoon. Credit card wala transaction tha. Txn id NP-3003223276. Jaldi solve karo please.
+
+Regards,
+Fatima Sheikh",P3,P3,False,True
+tr-00354,"needs_human: expected True, got False","Received: 2026-07-23 (Thu)
+Source: app-chat
+
+Hey, What types of foreign money can be used with this service.? My earlier ticket number is #83504. Kindly resolve this asap.",P3,P3,True,False
+tr-00355,"Priority: expected P2, got P3","Received: 2026-08-07 (Fri)
+Source: app-chat
+
+Hi, Please help me unblock my pin which I put the wrong one too many times. Thanks.",P2,P3,False,False
+tr-00362,"needs_human: expected False, got True","Received: 2026-07-12 (Sun)
+Source: app-chat
+
+Hello ji, Coupon expired bata raha hai jabki offer abhi valid hai. Teesri baar bol raha hoon. Reply ka wait kar raha hoon.",P3,P3,False,True
+tr-00364,"needs_human: expected True, got False","Received: 2026-07-08 (Wed)
+Source: twitter
+
+@NimbusPayCare Why won't my top up work. Transaction ID NP4841192788. Dated 28-06-26. My earlier ticket number is #74088. The transaction amount is 4001 rupees.",P3,P3,True,False
+tr-00369,"needs_human: expected False, got True","Received: 2026-08-30 (Sun)
+Source: email
+
+Subject: Help needed
+
+Namaste,
+Phone badalne ke baad account block ho gaya.  Teesri baar bol raha hoon.  Pichla ticket number #51088 tha.  App version 5.3.8 hai.  Dhanyavaad.
+
+Regards,
+Aarav Mehta
+
+> On 10 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay.  Your request has been registered with ticket #94222.  Our team will get back to you within 48 working hours.  Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay.  You can track the status of your request from the Help section of the app.  If you have already received a resolution, please ignore this message.  We value your trust and thank you for your patience while we look into this for you.
+
+> On 01 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay.  Your request has been registered with ticket #14145.  Our team will get back to you within 48 working hours.  Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay.  You can track the status of your request from the Help section of the app.  If you have already received a resolution, please ignore this message.  We value your trust and thank you for your patience while we look into this for you.
+
+> On 01 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay.  Your request has been registered with ticket #13680.  Our team will get back to you within 48 working hours.  Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay.  You can track the status of your request from the Help section of the app.  If you have already received a resolution, please ignore this message.  We value your trust and thank you for your patience while we look into this for you.
+
+> On 21 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay.  Your request has been registered with ticket #95016.  Our team will get back to you within 48 working hours.  Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay.  You can track the status of your request from the Help section of the app.  If you have already received a resolution, please ignore this message.  We value your trust and thank you for your patience while we look into this for you.
+
+> On 23 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay.  Your request has been registered with ticket #61114.  Our team will get back to you within 48 working hours.  Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay.  You can track the status of your request from the Help section of the app.  If you have already received a resolution, please ignore this message.  We value your trust and thank you for your patience while we look into this for you.
+
+> On 19 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay.  Your request has been registered with ticket #37814.  Our team will get back to you within 48 working hours.  Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay.  You can track the status of your request from the Help section of the app.  If you have already received a resolution, please ignore this message.  We value your trust and thank you for your patience while we look into this for you.
+
+> On 04 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay.  Your request has been registered with ticket #61405.  Our team will get back to you within 48 working hours.  Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay.  You can track the status of your request from the Help section of the app.  If you have already received a resolution, please ignore this message.  We value your trust and thank you for your patience while we look into this for you.
+
+> On 01 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay.  Your request has been registered with ticket #40406.  Our team will get back to you within 48 working hours.  Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay.  You can track the status of your request from the Help section of the app.  If you have already received a resolution, please ignore this message.  We value your trust and thank you for your patience while we look into this for you.
+
+> On 31 Jul 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay.  Your request has been registered with ticket #18301.  Our team will get back to you within 48 working hours.  Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay.  You can track the status of your request from the Help section of the app.  If you have already received a resolution, please ignore this message.  We value your trust and thank you for your patience while we look into this for you.
+
+> On 05 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay.  Your request has been registered with ticket #75204.  Our team will get back to you within 48 working hours.  Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay.  You can track the status of your request from the Help section of the app.  If you have already received a resolution, please ignore this message.  We value your trust and thank you for your patience while we look into this for you.
+
+> On 22 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay.  Your request has been registered with ticket #21047.  Our team will get back to you within 48 working hours.  Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay.  You can track the status of your request from the Help section of the app.  If you have already received a resolution, please ignore this message.  We value your trust and thank you for your patience while we look into this for you.
+
+> On 11 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay.  Your request has been registered with ticket #85850.  Our team will get back to you within 48 working hours.  Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay.  You can track the status of your request from the Help section of the app.  If you have already received a resolution, please ignore this message.  We value your trust and thank you for your patience while we look into this for you.  ",P2,P2,False,True
+tr-00379,"needs_human: expected False, got True","Received: 2026-08-01 (Sat)
+Source: app-chat
+
+I can't see my refund in my history. Amount: Rs. 8377 Mode: debit card. You can check NP 1458501327. Dated 27/07/2026. This is my second complaint on the same issue.",P2,P2,False,True
+tr-00380,"Priority: expected P3, got P1","Received: 2026-07-06 (Mon)
+Source: email
+
+Subject: Issue with my account
+
+
+I was charged two times for the same thing. You can check NP-3272133384. Transaction date 29th June 2026. I am using app version 6.3.18. Amount: INR 424 Please help.
+
+Regards,
+Fatima Sheikh",P3,P1,False,False
+tr-00382,"Priority: expected P3, got P2","Received: 2026-09-12 (Sat)
+Source: twitter
+
+@NimbusPayCare Payment process mein atak gaya hai aur paise kat chuke hain. Txn id np 33930 78402. Card se hua tha. App version 6.8.7 hai. 46094 rupaye ka transaction tha. Transaction date Sep 12 hai. Account mein abhi Rs. 298430 pade hain.",P3,P2,False,False
+tr-00402,"needs_human: expected False, got True","Received: 2026-09-02 (Wed)
+Source: app-chat
+
+Hi team, I can't remember my password. I have already written 4 times about this. Thanks.",P2,P2,False,True
+tr-00413,"Priority: expected P3, got P1","Received: 2026-09-13 (Sun)
+Source: app-chat
+
+Namaste, Payment process mein atak gaya hai aur paise kat chuke hain. UPI se hua tha. Pichla ticket number #10511 tha. ₹2,810 ka transaction tha. Reply ka wait kar raha hoon.",P3,P1,False,False
+tr-00424,"Priority: expected P1, got P3","Received: 2026-07-05 (Sun)
+Source: email
+
+Subject: Problem with NimbusPay
+
+Namaste,
+Shopping ka payment declnie ho gaya lekin bank ne pasie kaat liye. 01-07-26 ki transaction hai. Consumer court jaunga. Transaction ID NP4498747462 hai. Rakam 32501 rupaye hai.
+
+Regards,
+Aarav Mehta",P1,P3,True,True
+tr-00427,"Priority: expected P1, got P3","Received: 2026-09-19 (Sat)
+Source: twitter
+
+@NimbusPayCare Help, I was charged twice! I am on the iOS app. It was 5 days ago. ₹2,74,981 was the value.",P1,P3,True,True
+tr-00428,"needs_human: expected True, got False","Received: 2026-08-12 (Wed)
+Source: email
+
+Subject: Complaint
+
+Hey,
+Cashback from the shopping offer never reached my account. My earlier ticket number is #51648. Waiting for your reply.
+
+Regards,
+Pooja Nair",P3,P3,True,False
+tr-00452,"Priority: expected P3, got P1","Received: 2026-08-21 (Fri)
+Source: email
+
+Subject: Help needed
+
+Dear NimbusPay support,
+Hi, My card is getting declined during top-up. As it urgent, could you please resolve this issue, or guide me with other alternatives if any. Ref: NP-0666293113 Please help.
+
+Regards,
+Rahul Verma
+
+> On 24 Jul 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #70303. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 31 Jul 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #88448. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 11 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #52457. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 26 Jul 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #57043. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 28 Jul 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #84143. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 29 Jul 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #79331. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 02 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #39415. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 20 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #22393. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 10 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #84466. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 10 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #43614. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 27 Jul 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #27116. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 19 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #17058. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 20 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #30612. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 16 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #30271. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 20 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #17441. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.",P3,P1,False,False
+tr-00455,"needs_human: expected False, got True","Received: 2026-08-04 (Tue)
+Source: app-chat
+
+URGENT!! The promo code is not applying at checkout. I have already written 4 times about this. Mode: internet banking. App version is 5.2.14.",P3,P3,False,True
+tr-00465,"needs_human: expected False, got True","Received: 2026-08-20 (Thu)
+Source: twitter
+
+@NimbusPayCare How do I retrieve my passcode? I have contacted support about this before.",P2,P2,False,True
+tr-00467,"needs_human: expected True, got False","Received: 2026-09-17 (Thu)
+Source: twitter
+
+@NimbusPayCare I need to do a refund. The transaction amount is 3763 rupees. This happened today. My earlier ticket number is #16171. Mode: internet banking.",P3,P3,True,False
+tr-00474,"needs_human: expected True, got False","Received: 2026-07-15 (Wed)
+Source: email
+
+Subject: Help needed
+
+Hello,
+I used the wrong ping too many times and now the account is blocked. How do I unblock? My earlier ticket number is #44405. I am using app version 5.4.3. Kindly resolve this asap.
+
+Regards,
+Rohan Gupta",P2,P2,True,False
+tr-00481,"needs_human: expected True, got False","Received: 2026-06-18 (Thu)
+Source: email
+
+Subject: Issue with my account
+
+Hello,
+The referral code I shared did not give my friend the joining bonus. My earlier ticket number is #56213. Please help.
+
+Regards,
+Imran Khan",P3,P3,True,False
+tr-00485,"Priority: expected P3, got P1","Received: 2026-08-11 (Tue)
+Source: email
+
+Subject: Complaint
+
+Hi team,
+My card was not accepted in a shop. Total 394 rupees.
+
+Regards,
+Meera Joshi",P3,P1,False,False
+tr-00492,"needs_human: expected False, got True","Received: 2026-09-12 (Sat)
+Source: app-chat
+
+Good morning, I tried to used my card in a shop and the transaction was declined. FYI my daily limit is 951 rupees. This is my second complaint on the same issue. ₹7,238 is the amount. You can check np8756595915. Using the Android app. This happened on 05-09-26. Please help.",P2,P2,False,True
+tr-00503,"Priority: expected P3, got P1","Received: 2026-08-28 (Fri)
+Source: email
+
+Subject: Issue with my account
+
+
+What documents do I need to validate my identity?
+
+Regards,
+Sneha Iyer",P3,P1,False,False
+tr-00505,"Priority: expected P3, got P1","Received: 2026-08-15 (Sat)
+Source: app-chat
+
+Dear NimbusPay support, I'm not sure how to provide my identity. Using the Android app. Thanks.",P3,P1,False,False
+tr-00506,"needs_human: expected False, got True","Received: 2026-09-10 (Thu)
+Source: email
+
+Subject: Complaint
+
+
+Bill pay kiya tha, fail ho gaya, par account se paise chale gaye. App version 4.9.20 hai. Wallet se hua tha. Pehle bhi complaint kar chuka hoon. Rs. 127 kat gaye. Bank ref 661421356326 hai. Please help karo.
+
+Regards,
+Imran Khan",P3,P3,False,True
+tr-00508,"Priority: expected P3, got P1","Received: 2026-09-15 (Tue)
+Source: app-chat
+
+Hello, Can I verify my identity? App version is 7.2.19. Please look into it.",P3,P1,False,False
+tr-00517,"needs_human: expected False, got True","Received: 2026-08-18 (Tue)
+Source: ivr-transcript
+
+[IVR transcript] Hi, The top-up did not go through. My phone is a Realme 11. Rs. 2618 is the amount. I have contacted support about this before. The txn id is np7081804884. It took place on 16th August 2026. Waiting for your reply.",P3,P3,False,True
+tr-00523,"Priority: expected P3, got P1","Received: 2026-06-01 (Mon)
+Source: email
+
+Subject: Help needed
+
+Good morning,
+What is taking so long with my refund? Amount: INR 495 Bank ref no 688131927426. You can check NP-7780044598. Using the Android app. Dated 16 May. Waiting for your reply.
+
+Regards,
+Imran Khan",P3,P1,False,False
+tr-00533,"Priority: expected P3, got P1","Received: 2026-06-13 (Sat)
+Source: app-chat
+
+Bhai, Merchant bol raha hai refund kar diya, lekin mujhe mila nahi. Yeh 5 din pehle hua. Rs 543.50 kat gaye. Reply ka wait kar raha hoon.",P3,P1,False,False
+tr-00534,"needs_human: expected False, got True","Received: 2026-06-27 (Sat)
+Source: ivr-transcript
+
+[IVR transcript]  Where can I go to get my PIN unblocked? I have contacted support about this before. Thanks.",P2,P2,False,True
+tr-00541,"needs_human: expected False, got True","Received: 2026-06-25 (Thu)
+Source: app-chat
+
+Bhai, Merchant bol raha hai refund kar diya, lekin mujhe mila nahi. Reference NP 4075997376 hai. UPI se hua tha. Yeh 6 din pehle hua. App version 4.7.10 hai. Amount 4.5k tha. Teesri baar bol raha hoon. Please help karo.",P3,P3,False,True
+tr-00565,"needs_human: expected False, got True","Received: 2026-09-04 (Fri)
+Source: app-chat
+
+Dear NimbusPay support, A payment is showing twice. Why is that? 1.3k is the amount. Mode: wallet. Using the Android app. Transaction date 30 Aug. I have contacted support about this before. Thanks.",P3,P3,False,True
+tr-00567,"Priority: expected P2, got P3","Received: 2026-08-05 (Wed)
+Source: app-chat
+
+Hey, How do I reset my PIN, I can't seem to use my card? This is the third time I am contacting you. Please look into it.",P2,P3,True,True
+tr-00572,"needs_human: expected False, got True","Received: 2026-08-25 (Tue)
+Source: twitter
+
+@NimbusPayCare PIN bhool gaya aur reset link kaam nahi kar raha. Pehle bhi complaint kar chuka hoon.",P2,P2,False,True
+tr-00574,"needs_human: expected True, got False","Received: 2026-08-31 (Mon)
+Source: email
+
+Subject: Complaint
+
+Dear NimbusPay support,
+do I need anything for the identity check? App version is 7.5.5. My earlier ticket number is #11354.
+
+Regards,
+Imran Khan",P3,P3,True,False
+tr-00575,"needs_human: expected False, got True","Received: 2026-08-12 (Wed)
+Source: email
+
+Subject: Need support
+
+Hey,
+I could not get the top-up to go through. Mode: debit card. You can check NP 4113366697. Amount: Rs. 15192 I have already written 4 times about this. This happened on 24 Jul. Please look into it.
+
+Regards,
+Fatima Sheikh",P2,P2,False,True
+tr-00576,"needs_human: expected True, got False","Received: 2026-07-06 (Mon)
+Source: email
+
+Subject: Issue with my account
+
+Hi team,
+The referral code I shared did not give my friend the joining bonus. My earlier ticket number is #26726. INR 97 is the amount. Transaction date Jun 24. I am on the iOS app.
+
+Regards,
+Kavya Reddy
+
+> On 21 Jun 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #94206. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 29 Jun 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #60981. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 16 Jun 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #60893. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 28 Jun 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #80385. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 03 Jul 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #86007. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 06 Jun 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #25657. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 15 Jun 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #37923. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 01 Jul 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #58276. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 02 Jul 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #17718. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 13 Jun 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #65395. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 03 Jul 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #24364. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 13 Jun 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #80039. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 08 Jun 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #85426. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 29 Jun 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #25375. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 29 Jun 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #20919. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 19 Jun 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #86206. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.",P3,P3,True,False
+tr-00585,"needs_human: expected True, got False","Received: 2026-08-22 (Sat)
+Source: email
+
+Subject: Issue with my account
+
+Hello,
+What currencies can I hold? My earlier ticket number is #45653.
+
+Regards,
+Fatima Sheikh",P3,P3,True,False
+tr-00601,"needs_human: expected False, got True","Received: 2026-08-28 (Fri)
+Source: ivr-transcript
+
+[IVR transcript] Good morning, I locked myself out of my account, how do I unblock my PIN? This is my second complaint on the same issue. Waiting for your reply.",P2,P2,False,True
+tr-00612,"needs_human: expected True, got False","Received: 2026-07-24 (Fri)
+Source: app-chat
+
+Hi, What do I need to show who I am? My earlier ticket number is #92835. Please look into it.",P3,P3,True,False
+tr-00621,"needs_human: expected True, got False","Received: 2026-08-19 (Wed)
+Source: twitter
+
+@NimbusPayCare What am I going to need in order to verify my identity? My earlier ticket number is #41160.",P3,P3,True,False
+tr-00635,"needs_human: expected False, got True","Received: 2026-07-05 (Sun)
+Source: email
+
+Subject: Need support
+
+Hi,
+There's a duplicate charge on my account? This happened on 19-06-26.  My account balance is ₹24,930 right now.  I have already written 4 times about this.  It was a netbanking transaction.  The amount was ₹4,953.  App version is 4.1.11.  Thanks.
+
+Regards,
+Rohan Gupta .",P3,P3,False,True
+tr-00638,"Priority: expected P1, got P3","Received: 2026-06-23 (Tue)
+Source: app-chat
+
+Hi, I don't know where this transaction came from? It took place on Jun 9. My phone is a iPhone 13. My earlier ticket number is #47981. 37.9k is the amount. Thanks.",P1,P3,True,True
+tr-00648,"Priority: expected P2, got P3","Received: 2026-07-11 (Sat)
+Source: email
+
+Subject: Complaint
+
+Hello,
+What steps do I take to receive another passcode? I keep raising this again and again. Using the Android app.
+
+Regards,
+Kavya Reddy",P2,P3,True,True
+tr-00662,"needs_human: expected True, got False","Received: 2026-06-21 (Sun)
+Source: twitter
+
+@NimbusPayCare Why is it failing to top-up? This happened on 18th June 2026. It was a netbanking transaction. The amount was INR 749. ID: np4649577333 My earlier ticket number is #33759.",P3,P3,True,False
+tr-00682,"needs_human: expected False, got True","Received: 2026-09-17 (Thu)
+Source: twitter
+
+@NimbusPayCare Shopping ka payment decline ho gaya lekin bank ne piase kaat liye. Txn id NP2546383826. Pehle bhi complaint kar chuka hoon. Mera phone iPhone 13 hai. Rakam INR 470 hai. 15 Sep ki transaction hai.",P3,P3,False,True
+tr-00689,"Priority: expected P3, got P1","Received: 2026-07-15 (Wed)
+Source: app-chat
+
+Hi team, My credit card was declined. This happened 6 days ago. Using the Android app. ID: np3826661206 Waiting for your reply.",P3,P1,False,False
+tr-00691,"needs_human: expected False, got True","Received: 2026-08-08 (Sat)
+Source: app-chat
+
+Hey, Can you please help me in canceling my order. Transaction date 19/07/2026. INR 678 is the amount. This is my second complaint on the same issue. You can check NP-5176772778. Waiting for your reply.",P3,P3,False,True
+tr-00706,"Priority: expected P2, got P3","Received: 2026-08-25 (Tue)
+Source: email
+
+Subject: Problem with NimbusPay
+
+Good morning,
+Transfer has failed. It was for 10785 rupees. Mode: UPI. ID: NP9653195216 Bank ref no 173272754005. Waiting for your reply.
+
+Regards,
+Pooja Nair",P2,P3,False,False
+tr-00707,"Priority: expected P2, got P3","Received: 2026-09-15 (Tue)
+Source: app-chat
+
+Hi, Why is my refund missing in my statement? ID: NP-8807080198 Date of transaction: 11th September 2026. Amount: INR 47,506 Thanks.",P2,P3,False,False
+tr-00717,"Priority: expected P3, got P1","Received: 2026-06-06 (Sat)
+Source: app-chat
+
+Mera payment fail ho gaya lekin paise account se kat gaye. INR 911 kat gaye. Reference np4776850202 hai. Yeh 2nd June 2026 ko hua. Please help karo.",P3,P1,False,False
+tr-00724,"needs_human: expected False, got True","Received: 2026-06-05 (Fri)
+Source: app-chat
+
+Good morning, Hey, I have my card, how do I get it to show in the app? I have contacted support about this before. I am on the iOS app. Please help.",P3,P3,False,True
+tr-00727,"Priority: expected P3, got P2; needs_human: expected True, got False","Received: 2026-08-06 (Thu)
+Source: email
+
+Subject: Need support
+
+URGENT!!
+Why do I have a transaction showing multiple times? Transaction reference NP0546704240. It took place on 03-08-26. Rs 17,914.99 is the amount. FYI my daily limit is INR 20,243.
+
+Regards,
+Rahul Verma",P3,P2,True,False
+tr-00732,"needs_human: expected False, got True","Received: 2026-07-13 (Mon)
+Source: app-chat
+
+Hi, Ek hi order ke do baar paise kat gaye, ek wapas kar do. 2k kat gaye. 9 Jul ki transaction hai. Pehle bhi complaint kar chuka hoon. Wallet se hua tha. Android app use kar raha hoon. Jaldi solve karo please.",P3,P3,False,True
+tr-00745,"Priority: expected P3, got P1","Received: 2026-09-09 (Wed)
+Source: email
+
+Subject: Issue with my account
+
+Hello,
+What do I need for the verification check? Thanks.
+
+Regards,
+Rahul Verma",P3,P1,False,False
+tr-00746,"Priority: expected P2, got P3","Received: 2026-07-31 (Fri)
+Source: email
+
+Subject: Need support
+
+Dear NimbusPay support,
+Help me. The passcode doesn't work. Waiting for your reply.
+
+Regards,
+Sneha Iyer",P2,P3,False,False
+tr-00757,"Priority: expected P3, got P1","Received: 2026-07-16 (Thu)
+Source: email
+
+Subject: Problem with NimbusPay
+
+Bhai,
+Ek hi order ke do baar pasie kat gaye, ek wapas kar do. Wallet se hua tha. Txn id NP8355086752.
+
+Regards,
+Kavya Reddy",P3,P1,False,False
+tr-00782,"Priority: expected P3, got P1","Received: 2026-07-25 (Sat)
+Source: twitter
+
+@NimbusPayCare My identity verification isn't working. I am using app version 7.5.12.",P3,P1,False,False
+tr-00790,"needs_human: expected False, got True","Received: 2026-08-21 (Fri)
+Source: twitter
+
+asdf asdf",P3,P3,False,True
+tr-00794,"needs_human: expected False, got True","Received: 2026-07-08 (Wed)
+Source: email
+
+test test 123",P3,P3,False,True
+tr-00797,"needs_human: expected True, got False","Received: 2026-08-31 (Mon)
+Source: twitter
+
+@NimbusPayCare Can you tell me what I need for identity validation? My earlier ticket number is #29161.",P3,P3,True,False
+tr-00801,"needs_human: expected True, got False","Received: 2026-06-29 (Mon)
+Source: app-chat
+
+Hey, I was supposed to get a purchase refunded but I don't see the money in my account. My earlier ticket number is #93912. Dated Jun 23. It is Rs. 21574 in total. Mode: UPI. Thanks.",P2,P2,True,False
+tr-00802,"Priority: expected P3, got P1","Received: 2026-09-17 (Thu)
+Source: email
+
+Subject: Help needed
+
+Hi,
+I did not get the cashback that was promised on the offer. Mode: wallet. Using the Android app. Kindly resolve this asap.
+
+Regards,
+Kavya Reddy",P3,P1,False,False
+tr-00826,"needs_human: expected False, got True","Received: 2026-09-11 (Fri)
+Source: twitter
+
+@NimbusPayCare What do I have to do to activate my card? I have already written 4 times about this.",P3,P3,False,True
+tr-00828,"needs_human: expected False, got True","Received: 2026-09-17 (Thu)
+Source: app-chat
+
+The app doesn't believe that I am myself. I have contacted support about this before.",P3,P3,False,True
+tr-00832,"needs_human: expected True, got False","Received: 2026-08-22 (Sat)
+Source: email
+
+Subject: Help needed
+
+Dear NimbusPay support,
+Card payment was declined, do you know why? My earlier ticket number is #72385. The txn id is np8127939150. Rs 732.25 was the value. Waiting for your reply.
+
+Regards,
+Fatima Sheikh",P3,P3,True,False
+tr-00836,"needs_human: expected True, got False","Received: 2026-07-11 (Sat)
+Source: email
+
+Subject: Help needed
+
+Hi,
+Who should I talk to or go to resolve a duplicate charge on my statement? The amount was ₹38,279. My earlier ticket number is #62180. Kindly resolve this asap.
+
+Regards,
+Meera Joshi",P2,P2,True,False
+tr-00850,"needs_human: expected False, got True","Received: 2026-08-12 (Wed)
+Source: email
+
+Subject: Need support
+
+Hey,
+I could not get the top-up to go through.  Mode: debit card.  You can check NP 4113366697.  Amount: Rs.  15192 I have already written 4 times about this.  This happened on 24 Jul.  Please look into it.
+
+Regards,
+Fatima Sheikh Thx",P2,P2,False,True
+tr-00852,"Priority: expected P1, got P3","Received: 2026-06-08 (Mon)
+Source: app-chat
+
+Namaste, Bill pay kiya tha, fail ho gaya, par account se paise chale gaye. Rakam 19151 rupaye hai. Netbanking se hua tha. Transaction ID np5999441591 hai. Mera phone iPhone 13 hai. Consumer court jaunga. Please help karo.",P1,P3,True,True
+tr-00865,"needs_human: expected False, got True","Received: 2026-07-26 (Sun)
+Source: ivr-transcript
+
+[IVR transcript]  How old do you have to be to get an account? I have already written 4 times about this. Please help.",P3,P3,False,True
+tr-00879,"Priority: expected P3, got P1","Received: 2026-09-16 (Wed)
+Source: twitter
+
+@NimbusPayCare My payment card was declined - could you tell me why? Transaction reference np5124540295. It is INR 766 in total.",P3,P1,False,False
+tr-00890,"Priority: expected P1, got P3","Received: 2026-08-08 (Sat)
+Source: email
+
+Subject: Problem with NimbusPay
+
+Dear NimbusPay support,
+I can't seem to make a standard bank transfer. I have tried at least five times already but none of them are going through. Please tell me what is wrong? FYI my daily limit is 100 rupees. Mode: internet banking. ₹4,596 was the value. ID: NP8302599992 I will escalate this to the RBI. Dated 5th August 2026. I am using app version 7.1.15.
+
+Regards,
+Meera Joshi",P1,P3,True,True
+tr-00897,"needs_human: expected True, got False","Received: 2026-08-13 (Thu)
+Source: app-chat
+
+Dear NimbusPay support, I no longer have my passcode. I am on the iOS app. My earlier ticket number is #41517. Thanks.",P2,P2,True,False
+tr-00901,"needs_human: expected False, got True","Received: 2026-08-08 (Sat)
+Source: ivr-transcript
+
+[IVR transcript] Hi, Bill pay kiya tha, fail ho gaya, par account se pasie cahle gaye. Wallet se hua tha. Teesri baar bol raha hoon. 6 din pehle ki baat hai. Rakam Rs 8,820.99 hai. Reply ka wait kar raha hoon.",P2,P2,False,True
+tr-00902,"needs_human: expected False, got True","Received: 2026-07-09 (Thu)
+Source: email
+
+Subject: Help needed
+
+Hey,
+I see what looks like duplicate charges on account. This happened on 8th July 2026. I am using app version 7.6.16. 2747 rupees was the value. I have contacted support about this before. Waiting for your reply.
+
+Regards,
+Rohan Gupta",P3,P3,False,True
+tr-00919,"needs_human: expected False, got True","Received: 2026-08-09 (Sun)
+Source: email
+
+Subject: Complaint
+
+Namaste,
+OTP nahi aa raha isliye sign in nahi kar pa raha. Bank ref 782401445772 hai. Android app use kar raha hoon. Teesri baar bol raha hoon. Reply ka wait kar raha hoon.
+
+Regards,
+Ananya Bose",P2,P2,False,True
+tr-00929,"needs_human: expected False, got True","Received: 2026-09-15 (Tue)
+Source: app-chat
+
+Good morning, Where in the app do I go to verify my identity? I have contacted support about this before. I am using app version 6.0.1. Waiting for your reply.",P3,P3,False,True
+tr-00932,"Priority: expected P2, got P3","Received: 2026-06-07 (Sun)
+Source: twitter
+
+@NimbusPayCare How is this transfer supposed to work? It's not working for me. It was for 29.7k. Transaction date 21/05/2026. App version is 7.0.10.",P2,P3,False,False
+tr-00933,"Priority: expected P3, got P1","Received: 2026-06-19 (Fri)
+Source: app-chat
+
+Hi, Is there a reason behind why my transfer did not work? I am using app version 6.7.14. 1k was the value. It took place on 17/06/2026. Kindly resolve this asap.",P3,P1,False,False
+tr-00951,"needs_human: expected False, got True","Received: 2026-07-03 (Fri)
+Source: twitter
+
+@NimbusPayCare Refreral bonus was not recevied after my friend signed up. I am using app version 5.3.20. Total INR 189. I have already written 4 times about this.",P3,P3,False,True
+tr-00956,"needs_human: expected True, got False","Received: 2026-07-12 (Sun)
+Source: email
+
+Subject: Issue with my account
+
+URGENT!!
+My credit card was declined for top-up. Can you see if there is enough funds in my account? My earlier ticket number is #38700. Rs. 4879 is the amount. App version is 6.2.0. Kindly resolve this asap.
+
+Regards,
+Vikram Singh",P3,P3,True,False
+tr-00964,"needs_human: expected False, got True","Received: 2026-08-30 (Sun)
+Source: email
+
+Subject: Complaint
+
+Hi,
+Referral bonus was not recieved after my friend sigend up. I have contacted support about this before. It is ₹118 in total. App version is 7.1.5. Mode: credit card. Please look into it.
+
+Regards,
+Imran Khan",P3,P3,False,True
+tr-00965,"needs_human: expected True, got False","Received: 2026-09-04 (Fri)
+Source: app-chat
+
+Hi, I can't log in with this passocde. My earlier ticket number is #61734. Waiting for your reply.",P2,P2,True,False
+tr-00967,"Priority: expected P3, got P1","Received: 2026-06-01 (Mon)
+Source: app-chat
+
+Hey, I have multiple of the same transaction. Mode: credit card. This happened on May 27. The txn id is NP-2502508779. The amount was 459 rupees. Thanks.",P3,P1,False,False
+tr-00997,"needs_human: expected False, got True","Received: 2026-08-30 (Sun)
+Source: twitter
+
+@NimbusPayCare The app failed to verify my identity.  This is my second complaint on the same issue. .",P3,P3,False,True
+tr-01000,"needs_human: expected False, got True","Received: 2026-09-14 (Mon)
+Source: app-chat
+
+Hello ji, KYC reject ho gaya, photo unclear bol rahe hain. Bank ref 690324576178 hai. Pehle bhi complaint kar chuka hoon.",P3,P3,False,True
+tr-01002,"needs_human: expected False, got True","Received: 2026-07-13 (Mon)
+Source: app-chat
+
+Good morning, Why is my refund not visible on my statement? This is my second complaint on the same issue. Transaction reference NP-2992143142. Amount: ₹751 I am using app version 4.0.2. Transaction date 28-06-26.",P3,P3,False,True
+tr-01007,"needs_human: expected False, got True","Received: 2026-06-28 (Sun)
+Source: app-chat
+
+What are the steps of verifying an identity? I am on the iOS app. I have already written 4 times about this. Please look into it.",P3,P3,False,True
+tr-01017,"Priority: expected P1, got P3","Received: 2026-07-01 (Wed)
+Source: app-chat
+
+Hi, My reward points from the offer are missing. I will go to consumer court. This happened on 1st July 2026. Using the Android app. Please look into it.",P1,P3,True,True
+tr-01019,"Priority: expected P1, got P3","Received: 2026-06-04 (Thu)
+Source: app-chat
+
+Good morning, I am seeing unathorized transactions in the app, on my account. 552 rupees was the value. I am on the iOS app. That was 6 days ago. Thanks.",P1,P3,True,True
+tr-01023,"Priority: expected P1, got P3","Received: 2026-07-21 (Tue)
+Source: app-chat
+
+URGENT!! Why did my top-up not work? Mode: internet banking. Total ₹1,25,629. Date of transaction: 16 Jul. The txn id is NP8680938658. Please help.",P1,P3,True,True
+tr-01025,"needs_human: expected True, got False","Received: 2026-08-26 (Wed)
+Source: ivr-transcript
+
+[IVR transcript] Hello, I've been trying to transfer funds to top-up my card, but the transaction is not going through. Is there something I'm doing wrong? My earlier ticket number is #72800. This happened on 23rd August 2026. The amount was Rs 484.75. I am using app version 4.3.6.",P3,P3,True,False
+tr-01029,"needs_human: expected False, got True","Received: 2026-07-01 (Wed)
+Source: app-chat
+
+Hey, my payment was rejected, do you know why? It took place yesterday. I have already written 4 times about this. Please help.",P3,P3,False,True
+tr-01035,"needs_human: expected False, got True","Received: 2026-06-21 (Sun)
+Source: app-chat
+
+Good morning, Something is wrong with my payment account since it has been declined. Mode: wallet. This happened on 14 Jun. The txn id is NP-5465990678. I have already written 4 times about this. Using the Android app. 41.3k is the amount. Thanks.",P2,P2,False,True
+tr-01040,"needs_human: expected True, got False","Received: 2026-09-04 (Fri)
+Source: app-chat
+
+I don't have my access code for the app. My earlier ticket number is #28043. My phone is a Vivo Y56. Please look into it.",P2,P2,True,False
+tr-01048,"Priority: expected P3, got P1","Received: 2026-07-31 (Fri)
+Source: email
+
+Subject: Help needed
+
+
+Why am i being double charged for something? Bank ref no 507566902820. Rs 3,396.25 is the amount. Ref: NP3764973076 Date of transaction: 13th July 2026. Please help.
+
+Regards,
+Arjun Das",P3,P1,False,False
+tr-01057,"needs_human: expected True, got False","Received: 2026-09-15 (Tue)
+Source: app-chat
+
+Hello, What is the basis of your exchange rates? My earlier ticket number is #50599. Thanks.",P3,P3,True,False
+tr-01075,"needs_human: expected False, got True","Received: 2026-06-16 (Tue)
+Source: email
+
+Subject: Need support
+
+Hi,
+Seems like my top-up has failed. ID: NP 6628177398 Total 509 rupees. I have already written 4 times about this. Date of transaction: 5th June 2026. Kindly resolve this asap.
+
+Regards,
+Rohan Gupta
+
+> On 28 May 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #99451. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 06 Jun 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #67694. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 22 May 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #69618. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 27 May 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #40571. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 26 May 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #40358. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 13 Jun 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #93542. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 15 Jun 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #11941. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 15 Jun 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #16552. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 05 Jun 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #69215. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 06 Jun 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #21783. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 22 May 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #74296. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 19 May 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #83905. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.",P3,P3,False,True
+tr-01080,"needs_human: expected False, got True","Received: 2026-07-22 (Wed)
+Source: twitter
+
+@NimbusPayCare Why did my transfer not go through? That was 4 days ago. App version is 5.3.15. I have contacted support about this before. The transaction amount is Rs 409.50.",P3,P3,False,True
+tr-01086,"Priority: expected P1, got P3","Received: 2026-06-16 (Tue)
+Source: email
+
+Subject: Need support
+
+
+International transfer ki fees kya hai? Consumer court jaunga. Android app use kar raha hoon. Reply ka wait kar raha hoon.
+
+Regards,
+Aarav Mehta",P1,P3,True,True
+tr-01109,"Priority: expected P2, got P3","Received: 2026-09-17 (Thu)
+Source: app-chat
+
+Hi, I requested a refund but can't see it. Amount: 15.9k App version is 5.0.17. Date of transaction: 12 Sep. My account balance is Rs 4,124.75 right now. Mode: UPI. Transaction reference np 23886 84554. Waiting for your reply.",P2,P3,False,False
+tr-01127,"needs_human: expected True, got False","Received: 2026-09-09 (Wed)
+Source: twitter
+
+@NimbusPayCare do you offer refunds? i would like to return purchase. It is Rs. 1154 in total. Ref: NP1630581056 It was from the NimbusPay wallet. My earlier ticket number is #46880.",P3,P3,True,False
+tr-01128,"needs_human: expected True, got False","Received: 2026-07-23 (Thu)
+Source: email
+
+Subject: Complaint
+
+Good morning,
+can i create my own pin right away. I am on the iOS app. My earlier ticket number is #92893. Please look into it.
+
+Regards,
+Ananya Bose",P3,P3,True,False
+tr-01131,"Priority: expected P2, got P3","Received: 2026-06-06 (Sat)
+Source: twitter
+
+@NimbusPayCare Can I use app to unblock my card? I am using app version 5.1.8.",P2,P3,False,False
+tr-01132,"needs_human: expected True, got False","Received: 2026-08-15 (Sat)
+Source: app-chat
+
+Dear NimbusPay support, I am experiencing difficulty providing my identity. My earlier ticket number is #25641. Waiting for your reply.",P3,P3,True,False
+tr-01139,"needs_human: expected True, got False","Received: 2026-07-23 (Thu)
+Source: app-chat
+
+Hey, What types of foreign money can be used with this service.? My earlier ticket number is #83504. Kindly resolve this asap.",P3,P3,True,False
+tr-01146,"Priority: expected P3, got P1","Received: 2026-08-10 (Mon)
+Source: app-chat
+
+Hi, Mobile number chagne karna hai accuont mein. Please help karo.",P3,P1,False,False
+tr-01155,"needs_human: expected False, got True","Received: 2026-06-16 (Tue)
+Source: twitter
+
+@NimbusPayCare My password doesn't work. I have contacted support about this before.",P2,P2,False,True
+tr-01180,"needs_human: expected False, got True","Received: 2026-08-30 (Sun)
+Source: twitter
+
+@NimbusPayCare The app failed to verify my identity. This is my second complaint on the same issue.",P3,P3,False,True
+tr-01187,"needs_human: expected True, got False","Received: 2026-06-22 (Mon)
+Source: ivr-transcript
+
+[IVR transcript] Dear NimbusPay support, What is the expected delivery date of my card? My earlier ticket number is #81514. My phone is a iPhone 13. Waiting for your reply.",P3,P3,True,False
+tr-01194,"needs_human: expected True, got False","Received: 2026-06-30 (Tue)
+Source: twitter
+
+@NimbusPayCare I need a refund. This is not what i wanted. The transaction amount is Rs 735.50. Transaction ID NP4324115781. My earlier ticket number is #17443.",P3,P3,True,False
+tr-01196,"needs_human: expected False, got True","Received: 2026-06-16 (Tue)
+Source: email
+
+Subject: Help needed
+
+URGENT!!
+The prmoo code is not applynig at checkout. Amount: ₹170 This is my second complaint on the same issue. App version is 6.7.3. Kindly resolve this asap.
+
+Regards,
+Vikram Singh",P3,P3,False,True
+tr-01197,"needs_human: expected False, got True","Received: 2026-08-12 (Wed)
+Source: app-chat
+
+Hello, My scratch card reward has not been added. I have contacted support about this before.",P3,P3,False,True
+tr-01206,"needs_human: expected False, got True","Received: 2026-07-25 (Sat)
+Source: app-chat
+
+URGENT!! Something is wrong with my password. This is my second complaint on the same issue. I am using app version 6.4.0. Please help.",P2,P2,False,True
+tr-01218,"needs_human: expected False, got True","Received: 2026-08-08 (Sat)
+Source: email
+
+Subject: Help needed
+
+Good morning,
+I have a payment that shows twice. This is my second complaint on the same issue. I am using app version 5.2.17. The amount was 26.1k. Mode: wallet. Please help.
+
+Regards,
+Rohan Gupta",P2,P2,False,True
+tr-01222,"Priority: expected P3, got P1","Received: 2026-08-10 (Mon)
+Source: email
+
+Subject: Complaint
+
+
+The promo code is not applying at checkout. ₹341 was the value. I am using app version 6.3.5. Please help.
+
+Regards,
+Rahul Verma",P3,P1,False,False
+tr-01225,"needs_human: expected False, got True","Received: 2026-07-20 (Mon)
+Source: app-chat
+
+Hello, Is it possible to get a refund for the item? I am on the iOS app. It took place today. It was a UPI transaction. I have already written 4 times about this. The amount was Rs. 4093. Transaction ID np 86971 37550. Please help.",P3,P3,False,True
+tr-01229,"needs_human: expected True, got False","Received: 2026-07-31 (Fri)
+Source: app-chat
+
+Good morning, To many charges on my card how do I go about fixing that? My earlier ticket number is #54568. Using the Android app. It is INR 42,176 in total. Thanks.",P2,P2,True,False
+tr-01232,"needs_human: expected False, got True","Received: 2026-08-23 (Sun)
+Source: twitter
+
+@NimbusPayCare Can you send me the actual card? This is my second complaint on the same issue. My phone is a Realme 11.",P3,P3,False,True
+tr-01242,"needs_human: expected False, got True","Received: 2026-07-12 (Sun)
+Source: app-chat
+
+Hello ji, Coupon expired bata raha hai jabki offer abhi valid hai.  Teesri baar bol raha hoon.  Reply ka wait kar raha hoon. .",P3,P3,False,True
+tr-01255,"needs_human: expected False, got True","Received: 2026-06-23 (Tue)
+Source: app-chat
+
+URGENT!! The referral code I shared did not give my friend the joining bonus. My phone is a OnePlus Nord. It was for 329 rupees. This is my second complaint on the same issue. Please look into it.",P3,P3,False,True
+tr-01259,"needs_human: expected False, got True","Received: 2026-06-01 (Mon)
+Source: app-chat
+
+URGENT!! The promo code is not aplpying at checkout. The amount was 294 rupees. I have contacted support about this before. Using the Android app.",P3,P3,False,True
+tr-01271,"needs_human: expected False, got True","Received: 2026-07-21 (Tue)
+Source: ivr-transcript
+
+[IVR transcript] Hello ji, Shopping ka payment decline ho gaya lekin bank ne paise kaat liye. Rs 26,925.25 kat gaye. Teesri baar bol raha hoon. Transaction date 9 Jul hai. Wallet se hua tha. Mera phone iPhone 13 hai.",P2,P2,False,True
+tr-01290,"needs_human: expected False, got True","Received: 2026-09-05 (Sat)
+Source: app-chat
+
+Hello ji, Shopping ka payment decline ho gaya lekin bank ne paise kaat liye. Teesri baar bol raha hoon. Rakam Rs. 18097 hai. Wallet se hua tha. Txn id NP9751235081. Dhanyavaad.",P2,P2,False,True
+tr-01293,"needs_human: expected False, got True","Received: 2026-09-04 (Fri)
+Source: app-chat
+
+URGENT!! I would appreciate it if I could get an item refunded. Mode: internet banking. It was for ₹28,655. Ref: np 98834 75223 I am using app version 5.2.9. I have already written 4 times about this. Transaction date 1st September 2026.",P2,P2,False,True
+tr-01298,"needs_human: expected False, got True","Received: 2026-07-02 (Thu)
+Source: app-chat
+
+Hi, A refund is taking too long. Mode: internet banking. I have contacted support about this before. You can check np7987018978. Date of transaction: 27-06-26. Amount: 169 rupees Please look into it.",P3,P3,False,True
+tr-01299,"needs_human: expected False, got True","Received: 2026-07-19 (Sun)
+Source: app-chat
+
+Paise bheje the dost ko, usko mile nahi aur mere account se kat gaye. NP0683381718 check kar lo. Pehle bhi complaint kar chuka hoon. Jul 14 ki transaction hai. Amount INR 3,776 tha. UPI se hua tha. Jaldi solve karo please.",P3,P3,False,True
+tr-01300,"needs_human: expected True, got False","Received: 2026-08-23 (Sun)
+Source: app-chat
+
+Hi, There's a refund missing from my statement. The transaction amount is 4.7k. Using the Android app. This happened 4 days ago. My earlier ticket number is #11075. Waiting for your reply.",P3,P3,True,False
+tr-01305,"Priority: expected P2, got P3","Received: 2026-07-15 (Wed)
+Source: app-chat
+
+Hi team, I've just come back from an eating holiday in the USA and Canada and have SO many pending and duplicated transactions on my account. I think there is something wrong, can you look in to it please? App version is 7.4.3. Mode: debit card. INR 16,251 was the value. Dated 26/06/2026. Thanks.",P2,P3,False,False
+tr-01315,"needs_human: expected False, got True","Received: 2026-07-17 (Fri)
+Source: app-chat
+
+Dear NimbusPay support, Are there limitations to what currency I can hold? This is my second complaint on the same issue.",P3,P3,False,True
+tr-01319,"Priority: expected P1, got P3","Received: 2026-06-16 (Tue)
+Source: app-chat
+
+Hey, I attemped a transfer and it didn't go through. It was a netbanking transaction. I have contacted support about this before. I will escalate this to the RBI. The transaction amount is ₹1,00,126. You can check NP-6019747594. Please help.",P1,P3,True,True
+tr-01351,"needs_human: expected True, got False","Received: 2026-07-29 (Wed)
+Source: email
+
+Subject: Help needed
+
+Good morning,
+I have no idea why my card payment did not work. The amount was 31.7k. Ref: np 96571 19144 My earlier ticket number is #63761. It took place on 20-07-26. App version is 6.8.20. Thanks.
+
+Regards,
+Arjun Das",P2,P2,True,False
+tr-01353,"needs_human: expected True, got False","Received: 2026-07-30 (Thu)
+Source: email
+
+Subject: Problem with NimbusPay
+
+Dear NimbusPay support,
+What can I do to verify my identity? Using the Android app. My earlier ticket number is #21574.
+
+Regards,
+Rohan Gupta",P3,P3,True,False
+tr-01370,"Priority: expected P1, got P3","Received: 2026-09-18 (Fri)
+Source: app-chat
+
+Hello, I did not make this payment that I see in the App. FYI my daily limit is 410 rupees. INR 25,183 is the amount. My phone is a Redmi Note 12. Mode: internet banking.",P1,P3,True,True
+tr-01375,"Priority: expected P3, got P2","Received: 2026-07-03 (Fri)
+Source: app-chat
+
+Hi team, Where is my recent refund in the my statement? It was for 31855 rupees. It was a netbanking transaction. App version is 7.2.12. Waiting for your reply.",P3,P2,False,False
+tr-01380,"needs_human: expected False, got True","Received: 2026-09-15 (Tue)
+Source: app-chat
+
+URGENT!! Why can't I top up? I have already written 4 times about this. Amount: 9753 rupees Dated 13 Sep. I am using app version 6.5.8. It was a netbanking transaction. Kindly resolve this asap.",P2,P2,False,True
+tr-01399,"needs_human: expected False, got True","Received: 2026-08-30 (Sun)
+Source: email
+
+Subject: Help needed
+
+Namaste,
+Phone badalne ke baad account block ho gaya. Teesri baar bol raha hoon. Pichla ticket number #51088 tha. App version 5.3.8 hai. Dhanyavaad.
+
+Regards,
+Aarav Mehta
+
+> On 10 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #94222. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 01 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #14145. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 01 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #13680. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 21 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #95016. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 23 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #61114. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 19 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #37814. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 04 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #61405. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 01 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #40406. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 31 Jul 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #18301. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 05 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #75204. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 22 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #21047. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.
+
+> On 11 Aug 2026, NimbusPay Support wrote:
+> Thank you for contacting NimbusPay. Your request has been registered with ticket #85850. Our team will get back to you within 48 working hours. Please do not share your OTP, PIN or card details with anyone, including people who claim to be from NimbusPay. You can track the status of your request from the Help section of the app. If you have already received a resolution, please ignore this message. We value your trust and thank you for your patience while we look into this for you.",P2,P2,False,True
+tr-01403,"Priority: expected P1, got P3","Received: 2026-09-17 (Thu)
+Source: email
+
+Subject: Need support
+
+Hey,
+Can I be given a new passcode? Otherwise I will approach the consumer court. I am using app version 6.7.3. This is the third time I am contacting you. Waiting for your reply.
+
+Regards,
+Imran Khan",P1,P3,True,True
+tr-01407,"Priority: expected P3, got P1","Received: 2026-08-20 (Thu)
+Source: app-chat
+
+Hello ji, Reutrn accept ho gaya par refund nahi aaya abhi tak. Android app use kar raha hoon. Rs. 4207 ka transaction tha. Txn id NP 9445182921. Credit card wala transaction tha. Transaction date 15 Aug hai. Jaldi solve karo please.",P3,P1,False,False
+tr-01408,"needs_human: expected True, got False","Received: 2026-07-22 (Wed)
+Source: twitter
+
+@NimbusPayCare Can you explain the various transaction times shown on my statement? My earlier ticket number is #53446. The transaction amount is Rs 293.99. It took place 3 days ago.",P3,P3,True,False
+tr-01417,"needs_human: expected False, got True","Received: 2026-09-16 (Wed)
+Source: twitter
+
+@NimbusPayCare I'm not sure if my pop-up went through. Date of transaction: 16-09-26. It was a UPI transaction. Amount: 60 rupees I have contacted support about this before. FYI my daily limit is Rs 4,414.99.",P3,P3,False,True
+tr-01440,"needs_human: expected False, got True","Received: 2026-06-12 (Fri)
+Source: email
+
+Subject: Problem with NimbusPay
+
+Hi,
+I could not get my card to work at a shop. This is my second complaint on the same issue. The amount was 45053 rupees. It was 6 days ago. My phone is a Realme 11. Thanks.
+
+Regards,
+Imran Khan",P2,P2,False,True

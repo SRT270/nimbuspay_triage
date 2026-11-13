@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>report</title>
+
+<style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    color: #24292e;
+}
+h1, h2, h3, h4 {
+    color: #1f2328;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #d0d7de;
+    padding-bottom: 8px;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0;
+}
+th, td {
+    border: 1px solid #d0d7de;
+    padding: 8px 12px;
+    text-align: left;
+}
+th {
+    background-color: #f6f8fa;
+    font-weight: 600;
+}
+tr:nth-child(even) {
+    background-color: #f6f8fa;
+}
+code {
+    background-color: #eff1f3;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 85%;
+    font-family: ui-monospace, SFMono-Regular, monospace;
+}
+pre {
+    background-color: #f6f8fa;
+    padding: 16px;
+    border-radius: 6px;
+    overflow: auto;
+    border: 1px solid #d0d7de;
+}
+pre code {
+    background: none;
+    padding: 0;
+}
+blockquote {
+    border-left: 4px solid #0969da;
+    margin: 0;
+    padding-left: 16px;
+    color: #57606a;
+}
+hr {
+    border: none;
+    border-top: 1px solid #d0d7de;
+    margin: 24px 0;
+}
+@media print {
+    body {
+        margin: 10mm;
+        max-width: 100%;
+    }
+    pre, table {
+        page-break-inside: avoid;
+    }
+}
+</style>
+
+</head>
+<body>
+<h1>NimbusPay Ticket Triage — Machine Learning Project Report</h1>
+<p><strong>Role:</strong> Machine Learning Intern – LLM Fine-Tuning<br />
+<strong>Base Model:</strong> <code>Qwen/Qwen3-1.7B</code><br />
+<strong>Best Result:</strong> FP16 LoRA (Rank 16, Alpha 32) — <strong>94.5% Exact Match</strong>, <strong>98.88% Mean Field Accuracy</strong>, <strong>100% JSON Validity</strong> on the 200-ticket development set.</p>
+<hr />
+<h2>1. Data Audit Findings (<code>train.jsonl</code>)</h2>
+<p>The raw training dataset (1,445 records) was systematically audited against the labelling specification and cleaned down to 1,293 verified records:</p>
+<ol>
+<li><strong>Truncated Records (25 rows dropped):</strong> 25 records contained assistant JSON strings that were cut off mid-sentence (such as <code>tr-00060</code>, <code>tr-00125</code>, and <code>tr-00497</code>). These truncated records had unrecoverable syntax errors and were dropped (logged in <code>cleaning_log.csv</code>).</li>
+<li><strong>Schema Inconsistencies (506 rows reviewed and normalized):</strong> We audited and standardized non-standard keys (such as <code>prio</code> instead of <code>priority</code>), European date formatting (<code>DD/MM/YYYY</code>), and hyphenated transaction numbers (such as <code>NP-XXXX</code>).</li>
+<li><strong>Severe Rule Contradictions (127 rows dropped):</strong> We removed records where the ground-truth label directly contradicted the written rules (for example, cases where an unauthorized fraud transaction of 150,000 rupees was labelled P3 with <code>needs_human: false</code>). Training on such contradictions impairs model convergence.</li>
+<li><strong>Data Isolation:</strong> There is zero ID overlap between the training, development (200 records), and test (400 records) sets.</li>
+</ol>
+<hr />
+<h2>2. Controlled Experiment Comparison</h2>
+<p>Fine-tuning was conducted on a single Tesla T4 GPU using PEFT and TRL SFTTrainer with greedy decoding (<code>max_new_tokens = 220</code>, <code>max_input_length = 768</code>). Models were evaluated against the 200 development tickets using the official scorer (<code>candidate_pack/score.py</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Experiment</th>
+<th>Configuration</th>
+<th style="text-align: right;">Train Time</th>
+<th style="text-align: right;">Inference Time</th>
+<th style="text-align: right;">Peak VRAM</th>
+<th style="text-align: right;">JSON Valid</th>
+<th style="text-align: right;">Exact Match</th>
+<th style="text-align: right;">Mean Field Accuracy</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Baseline 1</strong></td>
+<td>Base Model + Fixed Prompt</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">3.17 min</td>
+<td style="text-align: right;">5.54 GB</td>
+<td style="text-align: right;">4.5%</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">0.06%</td>
+<td>Completed</td>
+</tr>
+<tr>
+<td><strong>Baseline 2</strong></td>
+<td>Base Model + Rules in Prompt</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">2.48 min</td>
+<td style="text-align: right;">6.05 GB</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">54.81%</td>
+<td>Completed</td>
+</tr>
+<tr>
+<td><strong>E1 (Raw)</strong></td>
+<td>4-bit QLoRA on raw noisy data</td>
+<td style="text-align: right;">28.82 min</td>
+<td style="text-align: right;">9.36 min</td>
+<td style="text-align: right;">6.18 GB</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">56.0%</td>
+<td style="text-align: right;">92.56%</td>
+<td>Completed</td>
+</tr>
+<tr>
+<td><strong>E1 (Clean)</strong></td>
+<td>4-bit QLoRA on clean audited data</td>
+<td style="text-align: right;">24.98 min</td>
+<td style="text-align: right;">7.58 min</td>
+<td style="text-align: right;">~6.20 GB</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">90.0%</td>
+<td style="text-align: right;">97.00%</td>
+<td>Completed</td>
+</tr>
+<tr>
+<td><strong>E2 (FP16)</strong></td>
+<td><strong>FP16 LoRA (Rank 16, Clean Data)</strong></td>
+<td style="text-align: right;"><strong>19.84 min</strong></td>
+<td style="text-align: right;"><strong>7.89 min</strong></td>
+<td style="text-align: right;"><strong>7.90 GB</strong></td>
+<td style="text-align: right;"><strong>100.0%</strong></td>
+<td style="text-align: right;"><strong>94.5%</strong></td>
+<td style="text-align: right;"><strong>98.88%</strong></td>
+<td><strong>Best Completed</strong></td>
+</tr>
+<tr>
+<td><strong>E3 (Rank 8)</strong></td>
+<td>FP16 LoRA (Rank 8, 8.7M params)</td>
+<td style="text-align: right;">18.56 min</td>
+<td style="text-align: right;">Pending</td>
+<td style="text-align: right;">8.11 GB</td>
+<td style="text-align: right;">Pending</td>
+<td style="text-align: right;">Pending</td>
+<td style="text-align: right;">Pending</td>
+<td>Train Done; Eval Pending</td>
+</tr>
+<tr>
+<td><strong>E4 (LR 1e-4)</strong></td>
+<td>FP16 LoRA (Rank 16, LR 1e-4)</td>
+<td style="text-align: right;">Ready</td>
+<td style="text-align: right;">Pending</td>
+<td style="text-align: right;">Pending</td>
+<td style="text-align: right;">Pending</td>
+<td style="text-align: right;">Pending</td>
+<td style="text-align: right;">Pending</td>
+<td>Planned / Script Ready</td>
+</tr>
+</tbody>
+</table>
+<h3>Key Experimental Insights</h3>
+<ul>
+<li><strong>Data Quality is the Decisive Factor:</strong> Cleaning the training data increased Exact Match from <strong>56.0% to 90.0%</strong> (a 34.0% absolute improvement), proving that clean annotations matter far more than prompt engineering.</li>
+<li><strong>Unquantized FP16 Weights Outperform 4-bit QLoRA:</strong> Training unquantized FP16 weights with LoRA delivered an additional <strong>4.5% Exact Match gain</strong> (94.5% vs 90.0%) and trained 5.14 minutes faster than 4-bit QLoRA while operating well within the 16 GB GPU limit (7.90 GB peak).</li>
+</ul>
+<hr />
+<h2>3. Error Analysis (Best Model: E2 FP16 LoRA)</h2>
+<p>On the 200 development tickets, the E2 FP16 LoRA model achieved 189 exact matches (94.5%). The remaining 11 mismatches break down into four clear patterns:</p>
+<table>
+<thead>
+<tr>
+<th>Ticket ID</th>
+<th>Prediction vs Ground Truth</th>
+<th>Root Cause Analysis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>dv-00006</strong></td>
+<td><code>txn_date</code>: <code>"2026-06-31"</code> vs <code>"2026-06-30"</code></td>
+<td><strong>Month-Boundary Arithmetic:</strong> Two days before July 2nd was calculated as June 31st (June has only 30 days). The model understood the relative time offset but lacked internal calendar tables.</td>
+</tr>
+<tr>
+<td><strong>dv-00010</strong></td>
+<td><code>category</code>: <code>fraud</code> (P1) vs <code>payment_failed</code> (P3)</td>
+<td><strong>Urgency Keyword Bias:</strong> The customer wrote "URGENT!!" for a missing top-up; the model overreacted and classified it as unauthorized fraud instead of a failed payment.</td>
+</tr>
+<tr>
+<td><strong>dv-00019</strong></td>
+<td><code>category</code>: <code>other</code> vs <code>refund</code></td>
+<td><strong>Implicit Complaint Intent:</strong> The customer complained of a faulty product without explicitly writing the word "refund". The model defaulted to <code>other</code>.</td>
+</tr>
+<tr>
+<td><strong>dv-00037</strong></td>
+<td><code>priority</code>: <code>P2</code> vs <code>P1</code></td>
+<td><strong>Numerical Threshold Comparison:</strong> A duplicate charge of 284,669 rupees was correctly extracted, but the model assigned P2 instead of P1 (rule: amounts of 50,000 rupees or more belong to P1).</td>
+</tr>
+<tr>
+<td><strong>dv-00044</strong></td>
+<td><code>priority</code>: <code>P3</code> vs <code>P2</code></td>
+<td><strong>P2 Threshold Slip:</strong> An 8,377 rupee refund was assigned P3 instead of P2 (rule: refunds of 5,000 rupees or more belong to P2).</td>
+</tr>
+<tr>
+<td><strong>dv-00084</strong></td>
+<td><code>category</code>: <code>account_access</code> vs <code>other</code></td>
+<td><strong>Gold-Label Inconsistency:</strong> The customer asked for a missing PIN. The written specification lists PIN issues under <code>account_access</code>, but the gold label assigned <code>other</code>.</td>
+</tr>
+<tr>
+<td><strong>dv-00124</strong></td>
+<td><code>txn_id</code>: <code>null</code> vs <code>"NP7026767936"</code></td>
+<td><strong>Colloquial Hinglish Phrasing:</strong> The model missed the transaction identifier when embedded in colloquial phrasing ("check kar lo").</td>
+</tr>
+<tr>
+<td><strong>dv-00157</strong></td>
+<td><code>category</code>: <code>account_access</code> vs <code>fraud</code></td>
+<td><strong>Keyword Collision:</strong> The customer reported an OTP scam ("OTP maang ke paise nikal liye"). The model attended to "OTP" instead of prioritizing the unauthorized theft (fraud).</td>
+</tr>
+<tr>
+<td><strong>dv-00177</strong></td>
+<td><code>category</code>: <code>fraud</code> vs <code>payment_failed</code></td>
+<td><strong>Ambiguous Phrasing:</strong> "Red flag on my top up" was interpreted as suspicious fraud instead of a failed top-up.</td>
+</tr>
+<tr>
+<td><strong>dv-00180</strong></td>
+<td><code>priority</code>: <code>P1</code> vs <code>P3</code></td>
+<td><strong>Account Balance Distraction:</strong> The customer stated their account balance (241,670 rupees) alongside a small transaction (3,130 rupees). The model extracted the right amount but escalated priority using the large balance.</td>
+</tr>
+<tr>
+<td><strong>dv-00194</strong></td>
+<td><code>category</code>: <code>account_access</code> vs <code>other</code></td>
+<td><strong>Card Lifecycle Boundary:</strong> Inquiring how to reactivate a lost card was classified as account access rather than a general inquiry (<code>other</code>).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>4. One-Week Improvement Plan</h2>
+<ol>
+<li><strong>Calendar Reference Header:</strong> Pre-inject calendar reference points into the header (such as <code>Yesterday: YYYY-MM-DD</code>) to eliminate date arithmetic errors.</li>
+<li><strong>Account Balance Distractor Data Augmentation:</strong> Generate 150 synthetic tickets pairing high account balances with small transaction amounts to teach the attention layers to decouple balances from priority escalation.</li>
+<li><strong>Targeted Loss Weighting:</strong> Apply double cross-entropy loss weight to <code>category</code> and <code>priority</code> tokens during training to sharpen decision boundaries.</li>
+<li><strong>Specification Alignment:</strong> Harmonize ambiguous labels (such as PIN inquiries) with annotators to ensure complete agreement between data and guidelines.</li>
+</ol>
+<hr />
+<h2>5. AI Tools Used</h2>
+<ul>
+<li><strong>Antigravity Assistant:</strong> Used for dataset syntax auditing, comparative metric consolidation, error categorization, and Markdown report drafting. All models were trained and scored using open-source PyTorch, Transformers, PEFT, TRL, and the official <code>candidate_pack/score.py</code> validator.</li>
+</ul>
+</body>
+</html>

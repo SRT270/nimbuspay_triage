@@ -1,0 +1,28 @@
+{
+  "experiment": "E2 - FP16 LoRA vs 4-bit QLoRA",
+  "fp16_lora": {
+    "training_minutes": 19.84,
+    "peak_training_memory_gb": 7.9,
+    "inference_minutes": 7.89,
+    "peak_inference_memory_gb": 4.78,
+    "json_validity": 1.0,
+    "exact_match": 0.945,
+    "mean_field_accuracy": 0.98875,
+    "field_accuracy": {
+      "category": 0.97,
+      "priority": 0.96,
+      "amount_paise": 1.0,
+      "txn_date": 0.995,
+      "txn_id": 0.995,
+      "channel": 1.0,
+      "language": 1.0,
+      "needs_human": 0.99
+    }
+  },
+  "qlora": {
+    "training_minutes": 24.98,
+    "peak_training_memory_gb": null,
+    "exact_match": 0.9,
+    "mean_field_accuracy": 0.97
+  }
+}

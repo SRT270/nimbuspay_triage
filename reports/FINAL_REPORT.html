@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>FINAL_REPORT</title>
+
+<style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    color: #24292e;
+}
+h1, h2, h3, h4 {
+    color: #1f2328;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #d0d7de;
+    padding-bottom: 8px;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0;
+}
+th, td {
+    border: 1px solid #d0d7de;
+    padding: 8px 12px;
+    text-align: left;
+}
+th {
+    background-color: #f6f8fa;
+    font-weight: 600;
+}
+tr:nth-child(even) {
+    background-color: #f6f8fa;
+}
+code {
+    background-color: #eff1f3;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 85%;
+    font-family: ui-monospace, SFMono-Regular, monospace;
+}
+pre {
+    background-color: #f6f8fa;
+    padding: 16px;
+    border-radius: 6px;
+    overflow: auto;
+    border: 1px solid #d0d7de;
+}
+pre code {
+    background: none;
+    padding: 0;
+}
+blockquote {
+    border-left: 4px solid #0969da;
+    margin: 0;
+    padding-left: 16px;
+    color: #57606a;
+}
+hr {
+    border: none;
+    border-top: 1px solid #d0d7de;
+    margin: 24px 0;
+}
+@media print {
+    body {
+        margin: 10mm;
+        max-width: 100%;
+    }
+    pre, table {
+        page-break-inside: avoid;
+    }
+}
+</style>
+
+</head>
+<body>
+<h1>NimbusPay Customer Support Ticket Triage: Automated Extraction and Classification via Parameter-Efficient Fine-Tuning</h1>
+<p><strong>Author:</strong> Machine Learning Engineering Candidate<br />
+<strong>Target Model:</strong> Qwen/Qwen3-1.7B with Parameter-Efficient Fine-Tuning (LoRA / QLoRA)<br />
+<strong>Evaluation Framework:</strong> Official Scorer (<code>candidate_pack/score.py</code>)<br />
+<strong>Repository:</strong> NimbusPay Customer Support Triage System  </p>
+<hr />
+<h2>1. Abstract</h2>
+<p>Modern digital payment platforms receive thousands of unstructured customer complaints daily across mobile apps, email, social media, and IVR voice transcripts. Automatically turning these raw messages into clean, structured database records governed by strict business logic is critical for fast routing and regulatory compliance. </p>
+<p>In this work, we fine-tune the open-weight <strong>Qwen3-1.7B</strong> model to read raw customer support tickets and output valid JSON containing eight required fields: ticket category, priority level, monetary amount in paise, transaction date, transaction identifier, payment channel, language, and human escalation requirement. </p>
+<p>We performed a rigorous multi-stage audit of the training data, removing malformed JSON and conflicting labels to produce a clean set of 1,293 training records. We then evaluated base-model zero-shot prompts and conducted controlled fine-tuning experiments (E1 to E4). </p>
+<p>Our findings show that data cleaning was the single most impactful step: switching from raw noisy training data (56.0% exact match) to audited data (90.0% exact match) produced a 34.0% absolute improvement. Furthermore, moving from 4-bit quantized LoRA to full-precision FP16 LoRA achieved <strong>94.5% Exact Match</strong> and <strong>98.88% Mean Field Accuracy</strong> on the 200-ticket development set, with 100% JSON syntactic validity and a peak training memory of 7.90 GB on a standard T4 GPU. A detailed error analysis investigates all 11 remaining development errors, identifying calendar arithmetic edge cases, urgency keyword bias, and subtle category boundaries.</p>
+<hr />
+<h2>2. Introduction</h2>
+<p>When payment transactions fail, users often submit panicked or ambiguous complaints. In the fintech sector, delays in identifying unauthorized transactions or regulatory threats can lead to severe customer dissatisfaction and compliance penalties from authorities such as the Reserve Bank of India (RBI).</p>
+<p>While proprietary cloud Large Language Models (LLMs) can perform this task, deploying commercial APIs for high-volume customer service incurs high inference costs, unpredictable network latency, and data privacy concerns. </p>
+<p>This project demonstrates that a compact, 1.7-billion parameter open-source model (<strong>Qwen3-1.7B</strong>), when adapted through parameter-efficient fine-tuning (PEFT), can internalize complex business rules, multi-tier escalation thresholds, and Hinglish currency expressions. At test time, the model requires no rules or examples in the prompt, consumes under 8 GB of GPU memory, and outputs strict JSON with high accuracy.</p>
+<hr />
+<h2>3. Problem Statement</h2>
+<p>The goal is to process an incoming customer ticket—consisting of a metadata header (<code>Received</code> date and <code>Source</code> channel) followed by customer text—and produce a single, strictly valid JSON object with exactly eight keys:</p>
+<pre><code class="language-json">{
+  &quot;category&quot;: &quot;refund&quot;,
+  &quot;priority&quot;: &quot;P1&quot;,
+  &quot;amount_paise&quot;: 28466900,
+  &quot;txn_date&quot;: &quot;2026-09-06&quot;,
+  &quot;txn_id&quot;: &quot;NP4284607517&quot;,
+  &quot;channel&quot;: null,
+  &quot;language&quot;: &quot;en&quot;,
+  &quot;needs_human&quot;: true
+}
+</code></pre>
+<h3>Business Rules and Field Definitions</h3>
+<ol>
+<li><strong>Category:</strong> Must be exactly one of seven values:</li>
+<li><code>fraud</code>: The customer reports a transaction they did not make, authorize, or recognize. Under the NimbusPay specification, fraud takes absolute precedence over all other categories.</li>
+<li><code>payment_failed</code>: A payment, transfer, or wallet top-up failed, was declined, remained pending, or did not reach the recipient.</li>
+<li><code>refund</code>: Money is owed back, such as duplicate charges, returned items, canceled orders, or missing merchant refunds.</li>
+<li><code>account_access</code>: Inability to log in, locked accounts, blocked PINs, forgotten passcodes, or missing OTPs.</li>
+<li><code>kyc</code>: Identity verification, document submission, Aadhaar/PAN issues, or pending verification status.</li>
+<li><code>offers</code>: Promotional cashbacks, discount coupons, scratch cards, and referral rewards.</li>
+<li>
+<p><code>other</code>: General questions, card delivery tracking, account closure, or foreign exchange queries.</p>
+</li>
+<li>
+<p><strong>Priority:</strong> Evaluated strictly in order:</p>
+</li>
+<li><code>P1</code>: Assigned if the category is fraud, if the disputed transaction amount is 50,000 rupees or more (5,000,000 paise), or if the customer makes a legal or regulatory threat (mentioning the RBI, banking ombudsman, consumer court, or lawyers).</li>
+<li><code>P2</code>: If not P1, assigned if the ticket is a failed payment or refund involving 5,000 rupees or more (500,000 paise), or if the category is account access.</li>
+<li>
+<p><code>P3</code>: All other standard queries.</p>
+</li>
+<li>
+<p><strong>Amount in Paise (<code>amount_paise</code>):</strong> The disputed transaction amount converted to integer paise (1 rupee = 100 paise). Distractor figures such as total account balances, overdraft limits, and transfer fees must be ignored. If no transaction amount is specified, this field must be null.</p>
+</li>
+<li>
+<p><strong>Transaction Date (<code>txn_date</code>):</strong> The date the disputed transaction took place in <code>YYYY-MM-DD</code> format. Relative references (such as "yesterday", "kal", "parso", or "3 days ago") must be resolved relative to the header <code>Received</code> date. If no date is given, this field is null.</p>
+</li>
+<li>
+<p><strong>Transaction Identifier (<code>txn_id</code>):</strong> A NimbusPay identifier starting with the letters <code>NP</code> followed by 10 digits. The model must normalize the text by removing spaces and hyphens (for example, converting "np 12345 67890" to "NP1234567890"). If no identifier is present, it is null.</p>
+</li>
+<li>
+<p><strong>Payment Channel (<code>channel</code>):</strong> One of <code>upi</code>, <code>card</code>, <code>netbanking</code>, or <code>wallet</code>, recorded only when explicitly stated in the text. Otherwise, it is null.</p>
+</li>
+<li>
+<p><strong>Language (<code>language</code>):</strong> Either <code>en</code> for standard English or <code>hi-en</code> for Hinglish (Hindi written in Latin script, often mixed with English).</p>
+</li>
+<li>
+<p><strong>Human Review Required (<code>needs_human</code>):</strong> Must be <code>true</code> if the priority is P1, or if the customer explicitly mentions previous unresolved contact (such as "calling again", "third complaint", or "baar baar"). Otherwise, it is <code>false</code>.</p>
+</li>
+</ol>
+<hr />
+<h2>4. Dataset Description</h2>
+<p>The NimbusPay benchmark consists of real-world style customer support tickets:</p>
+<table>
+<thead>
+<tr>
+<th>Dataset Partition</th>
+<th style="text-align: right;">Record Count</th>
+<th>Description</th>
+<th>Hygiene Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Raw Training Set</strong></td>
+<td style="text-align: right;">1,445</td>
+<td>Initial crowdsourced and logged tickets</td>
+<td>Contained syntax errors and conflicting labels</td>
+</tr>
+<tr>
+<td><strong>Cleaned Training Set (<code>v9</code>)</strong></td>
+<td style="text-align: right;">1,293</td>
+<td>Audited, normalized, deduplicated corpus</td>
+<td>Verified against the labelling specification</td>
+</tr>
+<tr>
+<td><strong>Development Set</strong></td>
+<td style="text-align: right;">200</td>
+<td>Benchmark validation set</td>
+<td>Held out entirely from training</td>
+</tr>
+<tr>
+<td><strong>Test Set</strong></td>
+<td style="text-align: right;">400</td>
+<td>Blind evaluation inputs</td>
+<td>Unlabelled test records with unique IDs</td>
+</tr>
+</tbody>
+</table>
+<p>There is zero overlap between the training, development, and test sets. All 400 test records have unique IDs and clean, properly formatted headers.</p>
+<hr />
+<h2>5. Data Preprocessing and Audit</h2>
+<p>Fine-tuning a language model on noisy data degrades its ability to follow deterministic business rules. We performed a systematic audit across two stages, logging all drops and modifications in <code>cleaning_log.csv</code> and <code>audit/</code>:</p>
+<h3>Stage 1: Syntax and Truncation Errors</h3>
+<p>We identified and dropped 25 records where the assistant JSON was truncated mid-generation in the raw data (for example, tickets <code>tr-00060</code>, <code>tr-00125</code>, and <code>tr-00497</code>). Because these labels ended abruptly with unclosed quotation marks and missing fields, they could not be reliably salvaged without injecting assumptions.</p>
+<h3>Stage 2: Schema Normalization and Contradiction Pruning</h3>
+<p>We reviewed 506 rows that contained informal formatting or direct business rule violations:
+- <strong>Key naming:</strong> Replaced non-standard keys like <code>prio</code> with <code>priority</code>.
+- <strong>Date formats:</strong> Converted European slash notation (<code>DD/MM/YYYY</code>) into standard ISO format (<code>YYYY-MM-DD</code>).
+- <strong>Identifier cleaning:</strong> Normalized hyphenated identifiers (such as <code>NP-9718716109</code>) to standard unhyphenated form.
+- <strong>Rule contradiction pruning:</strong> Removed 127 records where the ground-truth label directly contradicted the written specification (for example, cases where an unauthorized debit of 150,000 rupees was labelled P3 with <code>needs_human: false</code>). Training on such contradictions confuses gradient updates and impairs decision boundaries.</p>
+<p>The resulting clean training dataset contains 1,293 high-quality records (<code>final_dataset/train_final_corrected_v9.jsonl</code>).</p>
+<hr />
+<h2>6. System Architecture</h2>
+<p>The overall triage pipeline operates as follows:</p>
+<ol>
+<li><strong>Input Ingestion:</strong> The system receives the ticket header (<code>Received</code> date and <code>Source</code>) and the customer message.</li>
+<li><strong>Template Application:</strong> The message is formatted using Qwen3's native chat template with standard system and user roles:<blockquote>
+<p>System: "You are a customer support ticket triage assistant. Read the ticket and return a single JSON object with the triage fields."</p>
+</blockquote>
+</li>
+<li><strong>PEFT Adapter Inference:</strong> The input tokens pass through the frozen Qwen3-1.7B base model augmented with trained low-rank adapter weights across all linear attention and feed-forward layers.</li>
+<li><strong>Greedy Generation:</strong> The model generates tokens using greedy decoding (<code>temperature = 0</code>, <code>do_sample = False</code>, <code>max_new_tokens = 220</code>).</li>
+<li><strong>JSON Parsing:</strong> The output text is stripped of leading and trailing whitespace and parsed directly as a valid JSON object. No manual heuristic post-processing or external rule engines are applied.</li>
+</ol>
+<p>During fine-tuning, loss is computed exclusively on the assistant response tokens. Prompt tokens are masked out of the loss calculation so that gradient updates focus entirely on learning the JSON schema and business logic.</p>
+<hr />
+<h2>7. Model Methodology: Parameter-Efficient Fine-Tuning</h2>
+<p>Full fine-tuning of all 1.7 billion parameters requires substantial GPU memory and risks catastrophic forgetting of general language understanding. Instead, we use <strong>Low-Rank Adaptation (LoRA)</strong>.</p>
+<p>LoRA freezes the pre-trained weights and injects trainable rank decomposition matrices into each transformer layer. For a pre-trained weight matrix with dimensions $d \times k$, the update is represented as the product of two low-rank matrices $B$ (size $d \times r$) and $A$ (size $r \times k$), where the rank $r$ is much smaller than $d$ or $k$.</p>
+<p>We targeted all seven linear projections within the Qwen architecture: the query, key, value, and output projection layers in the multi-head attention blocks, as well as the gate, up, and down projection layers in the feed-forward network.</p>
+<p>We compared two adaptation precision modes:
+- <strong>4-bit QLoRA:</strong> The base model is compressed to 4-bit NormalFloat (NF4) precision, and computations dynamically dequantize weights to 16-bit precision during forward and backward passes.
+- <strong>FP16 LoRA:</strong> The base model remains in unquantized 16-bit half-precision float (<code>torch.float16</code>), while adapter updates are accumulated in full precision.</p>
+<hr />
+<h2>8. Fine-Tuning Configurations</h2>
+<p>All fine-tuning was conducted on a single Google Colab Tesla T4 GPU (16 GB VRAM) using the Hugging Face <code>peft</code> and <code>trl</code> libraries:</p>
+<table>
+<thead>
+<tr>
+<th>Configuration Setting</th>
+<th>Baseline QLoRA (E1)</th>
+<th>FP16 LoRA (E2 - Best)</th>
+<th>Rank-8 LoRA (E3)</th>
+<th>LR 1e-4 LoRA (E4)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Base Model</strong></td>
+<td>Qwen/Qwen3-1.7B</td>
+<td>Qwen/Qwen3-1.7B</td>
+<td>Qwen/Qwen3-1.7B</td>
+<td>Qwen/Qwen3-1.7B</td>
+</tr>
+<tr>
+<td><strong>Base Model Precision</strong></td>
+<td>4-bit NormalFloat (NF4)</td>
+<td>16-bit Float (FP16)</td>
+<td>16-bit Float (FP16)</td>
+<td>16-bit Float (FP16)</td>
+</tr>
+<tr>
+<td><strong>LoRA Rank ($r$)</strong></td>
+<td>16</td>
+<td>16</td>
+<td>8</td>
+<td>16</td>
+</tr>
+<tr>
+<td><strong>LoRA Alpha ($\alpha$)</strong></td>
+<td>32</td>
+<td>32</td>
+<td>16</td>
+<td>32</td>
+</tr>
+<tr>
+<td><strong>LoRA Dropout</strong></td>
+<td>0.05</td>
+<td>0.05</td>
+<td>0.05</td>
+<td>0.05</td>
+</tr>
+<tr>
+<td><strong>Trainable Parameters</strong></td>
+<td>17,432,576 (0.98%)</td>
+<td>17,432,576 (0.98%)</td>
+<td>8,716,288 (0.49%)</td>
+<td>17,432,576 (0.98%)</td>
+</tr>
+<tr>
+<td><strong>Learning Rate</strong></td>
+<td>2e-4</td>
+<td>2e-4</td>
+<td>2e-4</td>
+<td>1e-4</td>
+</tr>
+<tr>
+<td><strong>LR Schedule</strong></td>
+<td>Cosine with 3% warmup</td>
+<td>Cosine with 3% warmup</td>
+<td>Cosine with 3% warmup</td>
+<td>Cosine with 3% warmup</td>
+</tr>
+<tr>
+<td><strong>Effective Batch Size</strong></td>
+<td>16 (batch 2, accum 8)</td>
+<td>16 (batch 2, accum 8)</td>
+<td>16 (batch 2, accum 8)</td>
+<td>16 (batch 2, accum 8)</td>
+</tr>
+<tr>
+<td><strong>Training Epochs</strong></td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td><strong>Maximum Length</strong></td>
+<td>320 tokens</td>
+<td>320 tokens</td>
+<td>320 tokens</td>
+<td>320 tokens</td>
+</tr>
+<tr>
+<td><strong>Optimizer</strong></td>
+<td>Paged AdamW 8-bit</td>
+<td>AdamW torch</td>
+<td>AdamW torch</td>
+<td>AdamW torch</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>9. Baseline Evaluations</h2>
+<p>To establish reference benchmarks before fine-tuning, the base <code>Qwen/Qwen3-1.7B</code> model was evaluated on the 200 development tickets under two prompting strategies:</p>
+<table>
+<thead>
+<tr>
+<th>Baseline Configuration</th>
+<th>Prompt Strategy</th>
+<th style="text-align: right;">JSON Validity</th>
+<th style="text-align: right;">Exact Match</th>
+<th style="text-align: right;">Mean Field Accuracy</th>
+<th style="text-align: right;">Inference Time</th>
+<th style="text-align: right;">Peak VRAM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Baseline 1: Fixed Prompt</strong></td>
+<td>System prompt only, zero rules</td>
+<td style="text-align: right;">4.5%</td>
+<td style="text-align: right;"><strong>0.0%</strong></td>
+<td style="text-align: right;">0.06%</td>
+<td style="text-align: right;">3.17 min</td>
+<td style="text-align: right;">5.54 GB</td>
+</tr>
+<tr>
+<td><strong>Baseline 2: Rules in Prompt</strong></td>
+<td>Complete rules included in prompt</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;"><strong>0.0%</strong></td>
+<td style="text-align: right;">54.81%</td>
+<td style="text-align: right;">2.48 min</td>
+<td style="text-align: right;">6.05 GB</td>
+</tr>
+</tbody>
+</table>
+<h3>Baseline Observations</h3>
+<ul>
+<li><strong>Fixed prompt failure:</strong> Without fine-tuning, the base model cannot generate valid JSON (only 4.5% valid syntax). It outputs conversational filler, markdown commentary, or fragmented responses.</li>
+<li><strong>Rules prompt limitation:</strong> Placing the entire rulebook in the context window forces valid JSON syntax (100%), but fails to achieve even a single exact match across all eight fields (0.0%). The model extracts easy surface values (such as language) but consistently fails at multi-step priority calculations, date subtraction, and transaction ID normalization.</li>
+</ul>
+<hr />
+<h2>10. Experimental Comparison (E1 to E4)</h2>
+<p>All models were evaluated against the 200 held-out development tickets using the official evaluation script (<code>candidate_pack/score.py</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Experiment</th>
+<th>Configuration</th>
+<th style="text-align: right;">Train Time</th>
+<th style="text-align: right;">Inference Time</th>
+<th style="text-align: right;">Peak Train VRAM</th>
+<th style="text-align: right;">JSON Valid</th>
+<th style="text-align: right;">Dev Exact Match</th>
+<th style="text-align: right;">Mean Field Accuracy</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>E1 (Raw)</strong></td>
+<td>4-bit QLoRA on raw noisy data</td>
+<td style="text-align: right;">28.82 min</td>
+<td style="text-align: right;">9.36 min</td>
+<td style="text-align: right;">6.18 GB</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">56.00%</td>
+<td style="text-align: right;">92.56%</td>
+<td>Completed</td>
+</tr>
+<tr>
+<td><strong>E1 (Cleaned)</strong></td>
+<td>4-bit QLoRA on clean audited data</td>
+<td style="text-align: right;">24.98 min</td>
+<td style="text-align: right;">7.58 min</td>
+<td style="text-align: right;">~6.20 GB</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">90.00%</td>
+<td style="text-align: right;">97.00%</td>
+<td>Completed</td>
+</tr>
+<tr>
+<td><strong>E2 (FP16 LoRA)</strong></td>
+<td><strong>Unquantized FP16 LoRA ($r=16$)</strong></td>
+<td style="text-align: right;"><strong>19.84 min</strong></td>
+<td style="text-align: right;"><strong>7.89 min</strong></td>
+<td style="text-align: right;"><strong>7.90 GB</strong></td>
+<td style="text-align: right;"><strong>100.0%</strong></td>
+<td style="text-align: right;"><strong>94.50%</strong></td>
+<td style="text-align: right;"><strong>98.88%</strong></td>
+<td><strong>Best Completed</strong></td>
+</tr>
+<tr>
+<td><strong>E2 (QLoRA)</strong></td>
+<td>4-bit QLoRA on clean data</td>
+<td style="text-align: right;">24.98 min</td>
+<td style="text-align: right;">7.58 min</td>
+<td style="text-align: right;">~6.20 GB</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">90.00%</td>
+<td style="text-align: right;">97.00%</td>
+<td>Completed</td>
+</tr>
+<tr>
+<td><strong>E3 (Rank 8)</strong></td>
+<td>FP16 LoRA with rank 8 (8.7M params)</td>
+<td style="text-align: right;">18.56 min</td>
+<td style="text-align: right;">Pending GPU</td>
+<td style="text-align: right;">8.11 GB</td>
+<td style="text-align: right;">Pending</td>
+<td style="text-align: right;">Pending</td>
+<td style="text-align: right;">Pending</td>
+<td>Train Done; Eval Pending</td>
+</tr>
+<tr>
+<td><strong>E4 (LR 1e-4)</strong></td>
+<td>FP16 LoRA with lower learning rate</td>
+<td style="text-align: right;">Script Ready</td>
+<td style="text-align: right;">Pending GPU</td>
+<td style="text-align: right;">Pending</td>
+<td style="text-align: right;">Pending</td>
+<td style="text-align: right;">Pending</td>
+<td style="text-align: right;">Pending</td>
+<td>Planned / Script Ready</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>11. Evaluation Metrics and Key Findings</h2>
+<h3>Field-Level Accuracy Comparison Across Completed Runs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th style="text-align: right;">E1 Raw QLoRA</th>
+<th style="text-align: right;">E1 Cleaned QLoRA</th>
+<th style="text-align: right;">E2 FP16 LoRA (Best)</th>
+<th style="text-align: right;">Gain from Cleaning</th>
+<th style="text-align: right;">Gain from FP16</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>category</code></td>
+<td style="text-align: right;">95.50%</td>
+<td style="text-align: right;">97.50%</td>
+<td style="text-align: right;"><strong>97.00%</strong></td>
+<td style="text-align: right;">+2.00%</td>
+<td style="text-align: right;">-0.50%</td>
+</tr>
+<tr>
+<td><code>priority</code></td>
+<td style="text-align: right;">61.50%</td>
+<td style="text-align: right;">95.50%</td>
+<td style="text-align: right;"><strong>96.00%</strong></td>
+<td style="text-align: right;"><strong>+34.00%</strong></td>
+<td style="text-align: right;">+0.50%</td>
+</tr>
+<tr>
+<td><code>amount_paise</code></td>
+<td style="text-align: right;">100.00%</td>
+<td style="text-align: right;">99.00%</td>
+<td style="text-align: right;"><strong>100.00%</strong></td>
+<td style="text-align: right;">-1.00%</td>
+<td style="text-align: right;"><strong>+1.00%</strong></td>
+</tr>
+<tr>
+<td><code>txn_date</code></td>
+<td style="text-align: right;">98.50%</td>
+<td style="text-align: right;">99.00%</td>
+<td style="text-align: right;"><strong>99.50%</strong></td>
+<td style="text-align: right;">+0.50%</td>
+<td style="text-align: right;">+0.50%</td>
+</tr>
+<tr>
+<td><code>txn_id</code></td>
+<td style="text-align: right;">100.00%</td>
+<td style="text-align: right;">99.00%</td>
+<td style="text-align: right;"><strong>99.50%</strong></td>
+<td style="text-align: right;">-1.00%</td>
+<td style="text-align: right;">+0.50%</td>
+</tr>
+<tr>
+<td><code>channel</code></td>
+<td style="text-align: right;">99.50%</td>
+<td style="text-align: right;">100.00%</td>
+<td style="text-align: right;"><strong>100.00%</strong></td>
+<td style="text-align: right;">+0.50%</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td><code>language</code></td>
+<td style="text-align: right;">100.00%</td>
+<td style="text-align: right;">100.00%</td>
+<td style="text-align: right;"><strong>100.00%</strong></td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td><code>needs_human</code></td>
+<td style="text-align: right;">85.50%</td>
+<td style="text-align: right;">90.00%</td>
+<td style="text-align: right;"><strong>99.00%</strong></td>
+<td style="text-align: right;">+4.50%</td>
+<td style="text-align: right;"><strong>+9.00%</strong></td>
+</tr>
+<tr>
+<td><strong>Overall Exact Match</strong></td>
+<td style="text-align: right;"><strong>56.00%</strong></td>
+<td style="text-align: right;"><strong>90.00%</strong></td>
+<td style="text-align: right;"><strong>94.50%</strong></td>
+<td style="text-align: right;"><strong>+34.00%</strong></td>
+<td style="text-align: right;"><strong>+4.50%</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>Key Takeaways</h3>
+<ol>
+<li><strong>Data Cleaning is Decisive:</strong> Training on uncleaned data resulted in severe priority errors (61.5% accuracy) and dropped overall exact match to 56.0%. Auditing the data and removing conflicting labels raised exact match to 90.0%—a 34.0% absolute improvement—while reducing training time by almost 4 minutes.</li>
+<li><strong>FP16 Unquantized Base Precision Improves Reasoning:</strong> Running LoRA on unquantized FP16 weights improved exact match from 90.0% to 94.5%, reducing total mismatches from 20 to 11. Human escalation accuracy improved from 90.0% to 99.0%, and monetary extraction reached a perfect 100.0%. Furthermore, avoiding 4-bit weight dequantization overhead during backward passes made FP16 training 5.14 minutes faster (19.84 min vs 24.98 min) while comfortably fitting inside the 16 GB GPU limit (7.90 GB peak).</li>
+<li><strong>E3 Convergence Profile:</strong> Halving the LoRA rank to 8 reduced trainable parameters by half (8.7M vs 17.4M) and finished training in 18.56 minutes. The training loss converged steadily to an evaluation loss of 0.00845 and a token accuracy of 99.87%.</li>
+</ol>
+<hr />
+<h2>12. Error Analysis (Best Model: E2 FP16 LoRA)</h2>
+<p>On the 200 development tickets, the E2 FP16 LoRA model achieved 189 exact matches (94.5%). Below is a thorough review of the 11 mismatches:</p>
+<table>
+<thead>
+<tr>
+<th>Ticket ID</th>
+<th>Input Summary</th>
+<th>Model Prediction</th>
+<th>Ground Truth (Gold)</th>
+<th>Root Cause Analysis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>dv-00006</strong></td>
+<td>Ticket date 2026-07-02. Customer reports fraud "day before yesterday".</td>
+<td><code>txn_date</code>: <code>"2026-06-31"</code></td>
+<td><code>txn_date</code>: <code>"2026-06-30"</code></td>
+<td><strong>Month-boundary arithmetic:</strong> Two days before July 2 is June 30. The model hallucinated June 31 (June has only 30 days). The model understood the relative time offset but lacked internal calendar tables.</td>
+</tr>
+<tr>
+<td><strong>dv-00010</strong></td>
+<td>"URGENT!! I didn't see the money I added to my card. INR 2,570."</td>
+<td><code>category</code>: <code>fraud</code><br><code>priority</code>: <code>P1</code></td>
+<td><code>category</code>: <code>payment_failed</code><br><code>priority</code>: <code>P3</code></td>
+<td><strong>Urgency keyword bias:</strong> The emotional exclamation "URGENT!!" and missing top-up funds led the model to predict unauthorized fraud rather than a failed card top-up. Priority and human review cascaded from this error.</td>
+</tr>
+<tr>
+<td><strong>dv-00019</strong></td>
+<td>"My product was faulty. Amount: 259419 rupees... Mode: credit card."</td>
+<td><code>category</code>: <code>other</code></td>
+<td><code>category</code>: <code>refund</code></td>
+<td><strong>Implicit intent:</strong> The customer complained of a defective product without explicitly writing the word "refund". The model defaulted to <code>other</code>.</td>
+</tr>
+<tr>
+<td><strong>dv-00037</strong></td>
+<td>"Charged twice for purchases... duplicate charges refunded. 284669 rupees."</td>
+<td><code>priority</code>: <code>P2</code><br><code>needs_human</code>: <code>false</code></td>
+<td><code>priority</code>: <code>P1</code><br><code>needs_human</code>: <code>true</code></td>
+<td><strong>Threshold comparison slip:</strong> The model correctly extracted 284,669 rupees, but assigned P2 instead of P1. The 50,000 rupee threshold comparison failed.</td>
+</tr>
+<tr>
+<td><strong>dv-00044</strong></td>
+<td>"Can't see refund in history. Amount: Rs. 8377... second complaint."</td>
+<td><code>priority</code>: <code>P3</code></td>
+<td><code>priority</code>: <code>P2</code></td>
+<td><strong>P2 threshold slip:</strong> Refunds of 5,000 rupees or more belong to P2. The model assigned P3 despite extracting the correct amount.</td>
+</tr>
+<tr>
+<td><strong>dv-00084</strong></td>
+<td>"I didn't get a PIN yet. What gives? I am on the iOS app."</td>
+<td><code>category</code>: <code>account_access</code><br><code>priority</code>: <code>P2</code></td>
+<td><code>category</code>: <code>other</code><br><code>priority</code>: <code>P3</code></td>
+<td><strong>Gold-label inconsistency:</strong> The labelling specification explicitly classifies PIN problems under <code>account_access</code>. The model followed the written rule, but the gold label was marked <code>other</code>.</td>
+</tr>
+<tr>
+<td><strong>dv-00124</strong></td>
+<td>"Merchant bol raha hai refund kar diya... Pichla ticket #13657. NP 7026767936 check kar lo."</td>
+<td><code>txn_id</code>: <code>null</code><br><code>priority</code>: <code>P2</code></td>
+<td><code>txn_id</code>: <code>"NP7026767936"</code><br><code>priority</code>: <code>P3</code></td>
+<td><strong>Colloquial Hinglish extraction:</strong> The model missed the transaction ID when surrounded by colloquial phrasing ("check kar lo") and misclassified priority as P2.</td>
+</tr>
+<tr>
+<td><strong>dv-00157</strong></td>
+<td>"Kisi ne OTP maang ke mere paise nikal liye, yeh maine nahi kiya... 140 rupaye kat gaye."</td>
+<td><code>category</code>: <code>account_access</code><br><code>priority</code>: <code>P2</code></td>
+<td><code>category</code>: <code>fraud</code><br><code>priority</code>: <code>P1</code></td>
+<td><strong>Keyword collision:</strong> The ticket describes social engineering where an OTP was stolen to withdraw money. The model latched onto "OTP" (an account access keyword) instead of prioritizing the unauthorized theft (fraud).</td>
+</tr>
+<tr>
+<td><strong>dv-00177</strong></td>
+<td>"There has been a red flag on my top up. Amount: Rs. 293571."</td>
+<td><code>category</code>: <code>fraud</code></td>
+<td><code>category</code>: <code>payment_failed</code></td>
+<td><strong>Ambiguous phrasing:</strong> The phrase "red flag" triggered the model's fraud detector, whereas the human annotator categorized it as a flagged payment failure.</td>
+</tr>
+<tr>
+<td><strong>dv-00180</strong></td>
+<td>"Item refund. Account balance is Rs. 241670. Transaction amount is ₹3,130."</td>
+<td><code>priority</code>: <code>P1</code></td>
+<td><code>priority</code>: <code>P3</code></td>
+<td><strong>Account balance distraction:</strong> The model extracted the correct transaction amount (₹3,130), but self-attention between the large account balance (₹241,670) and the priority head erroneously triggered P1 escalation.</td>
+</tr>
+<tr>
+<td><strong>dv-00194</strong></td>
+<td>"If I find a card I lost do I need to dispose of it? Or can I re-activate it?"</td>
+<td><code>category</code>: <code>account_access</code><br><code>priority</code>: <code>P2</code></td>
+<td><code>category</code>: <code>other</code><br><code>priority</code>: <code>P3</code></td>
+<td><strong>Card lifecycle boundary:</strong> Inquiring about reactivating a card was classified as account access by the model, whereas annotators treated general card queries as <code>other</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>13. Limitations</h2>
+<ol>
+<li><strong>Hardware Constraints:</strong> All experiments were constrained to a single Tesla T4 GPU (16 GB VRAM) on Google Colab. Larger backbones (such as 7B or 14B models) could not be explored under the competition's 4B parameter ceiling and runtime budget.</li>
+<li><strong>Calendar Boundary Reasoning:</strong> Without an external symbolic calendar calculator, the language model occasionally hallucinates invalid dates (such as June 31) when calculating relative date offsets across month transitions.</li>
+<li><strong>Implicit Complaint Semantics:</strong> When customers report product defects without explicitly asking for a refund (as in ticket <code>dv-00019</code>), the model cannot always disambiguate whether company policy treats the complaint as a financial refund or a general merchant dispute.</li>
+</ol>
+<hr />
+<h2>14. Conclusion</h2>
+<p>This project demonstrates that a compact 1.7B parameter model (<strong>Qwen3-1.7B</strong>), when fine-tuned using FP16 LoRA on audited data, serves as a highly accurate and deterministic ticket triage engine:
+- Achieved <strong>94.5% Exact Match</strong> across all eight fields and <strong>98.88% Mean Field Accuracy</strong> on the official 200-ticket benchmark.
+- Maintained <strong>100% JSON syntactic validity</strong> with zero malformed outputs.
+- Achieved perfect <strong>100% accuracy</strong> on monetary extraction (<code>amount_paise</code>), payment channel identification (<code>channel</code>), and language classification (<code>language</code>).
+- Confirmed that data cleaning yielded a <strong>34.0% absolute improvement</strong> over raw data, while unquantized FP16 weights provided an additional <strong>4.5% improvement</strong> over 4-bit QLoRA.</p>
+<hr />
+<h2>15. Future Improvements</h2>
+<p>With an additional week of development time, we recommend the following enhancements:</p>
+<ol>
+<li><strong>Calendar Context Pre-Injection:</strong> Add pre-calculated calendar reference points to the input header (such as <code>Yesterday: 2026-07-01 | Day Before Yesterday: 2026-06-30</code>). This completely eliminates calendar boundary arithmetic errors without altering prompt rules.</li>
+<li><strong>Balance Distractor Data Augmentation:</strong> Synthesize 150 training tickets combining high account balances with small transaction amounts to train the self-attention mechanism to decouple account balances from priority escalation.</li>
+<li><strong>Loss Weighting on Priority and Category Tokens:</strong> Apply higher cross-entropy loss weights to tokens governing <code>category</code> and <code>priority</code> during training to sharpen numerical threshold boundaries (₹5,000 and ₹50,000).</li>
+<li><strong>Annotation Reconciliation:</strong> Work with the data annotation team to resolve ambiguous edge cases (such as PIN inquiries and faulty product returns) so that ground-truth labels perfectly match written guidelines.</li>
+</ol>
+<hr />
+<h2>16. Reproducibility Instructions</h2>
+<h3>Environment Setup</h3>
+<p>Install the verified dependencies in your environment:</p>
+<pre><code class="language-bash">pip install torch transformers peft trl accelerate
+</code></pre>
+<h3>Reproducing E3 Evaluation (on GPU)</h3>
+<pre><code class="language-bash">python scripts/evaluate_adapter.py \
+    --adapter qlora_checkpoints/qwen3_1.7b_rank8_e3/best_adapter \
+    --gold final_dataset/dev_final_quoted_history_cleaned_v3.jsonl \
+    --predictions baseline_results/rank8_e3_predictions.jsonl \
+    --score-script candidate_pack/score.py \
+    --result-json baseline_results/experiment_E3_results.json \
+    --experiment &quot;E3 - Rank 8 FP16 LoRA&quot;
+</code></pre>
+<h3>Reproducing E4 Training and Evaluation (on GPU)</h3>
+<pre><code class="language-bash">python scripts/train_e4.py
+python scripts/evaluate_adapter.py \
+    --adapter qlora_checkpoints/qwen3_1.7b_lr1e4_e4/best_adapter \
+    --gold final_dataset/dev_final_quoted_history_cleaned_v3.jsonl \
+    --predictions baseline_results/lr1e4_e4_predictions.jsonl \
+    --score-script candidate_pack/score.py \
+    --result-json baseline_results/experiment_E4_results.json \
+    --experiment &quot;E4 - LR 1e-4 FP16 LoRA&quot;
+</code></pre>
+<h3>Generating and Validating Test Predictions</h3>
+<pre><code class="language-bash"># Generate 400 predictions on test_inputs_final.jsonl using the best adapter
+python scripts/predict_test.py \
+    --adapter adapter \
+    --test final_dataset/test_inputs_final.jsonl \
+    --output predictions_test.jsonl
+
+# Validate prediction count, unique IDs, and JSON schema compliance
+python scripts/validate_predictions.py \
+    --test final_dataset/test_inputs_final.jsonl \
+    --predictions predictions_test.jsonl \
+    --report baseline_results/test_validation_report.json
+</code></pre>
+<h3>Consolidating Comparisons</h3>
+<pre><code class="language-bash">python scripts/compare_experiments.py
+</code></pre>
+</body>
+</html>

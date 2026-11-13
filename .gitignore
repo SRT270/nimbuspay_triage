@@ -1,0 +1,17 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Submission ZIP
+*.zip
+
+# Assignment constraint: Do not push training data or intermediate multi-GB checkpoints
+candidate_pack/data/train.jsonl
+train_audit_stage1.jsonl
+qlora_checkpoints/

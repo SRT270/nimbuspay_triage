@@ -1,0 +1,7 @@
+experiment,training_minutes,inference_minutes,peak_training_memory_gb,peak_inference_memory_gb,json_validity,exact_match,mean_field_accuracy
+E1 - Raw QLoRA,28.82,,6.18,,1.0,0.56,0.925625
+E1 - Cleaned QLoRA,24.98,,,,,0.9,0.97
+E2 - FP16 LoRA,19.84,,7.9,,1.0,0.945,0.98875
+E2 - QLoRA,24.98,,,,,0.9,0.97
+E3 - Rank 8 FP16 LoRA,18.56,,8.11,,,,
+E4 - LR 1e-4 FP16 LoRA,,,,,,,
